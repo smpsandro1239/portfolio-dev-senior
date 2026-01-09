@@ -1,0 +1,92 @@
+{
+  "name": "portfolio-dev-senior",
+  "version": "1.0.0",
+  "description": "Portfolio técnico pessoal desenvolvido em HTML, CSS e JavaScript vanilla",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint:html": "html-validate src/index.html",
+    "lint:css": "stylelint 'src/css/*.css'",
+    "lint:js": "eslint 'src/js/*.js'",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "build": "node scripts/build.js",
+    "serve": "serve src -l 3000",
+    "lighthouse": "lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html",
+    "validate": "npm run lint && npm test"
+  },
+  "keywords": [
+    "portfolio",
+    "vanilla-javascript",
+    "html5",
+    "css3",
+    "responsive-design",
+    "accessibility",
+    "performance"
+  ],
+  "author": "Sandro Pereira <sandro@exemplo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard": "^36.0.0",
+    "html-validate": "^8.7.4",
+    "lighthouse": "^11.4.0",
+    "@axe-core/cli": "^4.8.3",
+    "serve": "^14.2.1",
+    "terser": "^5.26.0",
+    "csso-cli": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/js/**/*.js",
+      "!src/js/**/*.test.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2020": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "rules": {
+      "no-unused-vars": "error",
+      "no-console": "warn",
+      "prefer-const": "error",
+      "no-var": "error"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "custom-property-pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      "selector-class-pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smpsandro1239/portfolio-dev-senior.git"
+  },
+  "homepage": "https://smpsandro1239.github.io/portfolio-dev-senior/",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
