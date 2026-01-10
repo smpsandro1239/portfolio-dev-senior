@@ -291,6 +291,9 @@ class PortfolioApp {
         // Observe elements for scroll animations
         this.animationController.observeElements('.hero');
         this.animationController.observeElements('.section__title');
+        this.animationController.observeElements('.stat-card');
+        this.animationController.observeElements('.stats-streak');
+        this.animationController.observeElements('.stats-activity');
         this.animationController.observeElements('.course');
         this.animationController.observeElements('.contact');
     }
