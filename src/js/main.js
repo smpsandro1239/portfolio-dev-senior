@@ -69,6 +69,9 @@ class PortfolioApp {
             // Set up animations
             this.setupAnimations();
             
+            // Set up header scroll effect
+            this.setupHeaderScrollEffect();
+            
             console.log('Portfolio app initialized successfully');
         } catch (error) {
             console.error('Error initializing portfolio app:', error);
@@ -290,6 +293,39 @@ class PortfolioApp {
         this.animationController.observeElements('.section__title');
         this.animationController.observeElements('.course');
         this.animationController.observeElements('.contact');
+    }
+    
+    /**
+     * Set up header scroll effect
+     */
+    setupHeaderScrollEffect() {
+        const header = document.querySelector('.header');
+        if (!header) return;
+        
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        
+        const updateHeader = () => {
+            const scrollY = window.scrollY;
+            
+            if (scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScrollY = scrollY;
+            ticking = false;
+        };
+        
+        const requestTick = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        };
+        
+        window.addEventListener('scroll', requestTick, { passive: true });
     }
     
     /**
