@@ -24,13 +24,15 @@ jobs:
       run: npm ci
 
     # --- Validações de código (ESLint v9 com eslint.config.js) ---
+    # IMPORTANTE: Usa npm scripts em vez de comandos ESLint diretos
+    # para garantir compatibilidade com ESLint v9 e configuração moderna
     - name: Validate HTML
       run: npm run lint:html
         
     - name: Validate CSS
       run: npm run lint:css
         
-    - name: Validate JavaScript
+    - name: Validate JavaScript (ESLint v9)
       run: npm run lint:js
 
     # --- Lighthouse CI ---
