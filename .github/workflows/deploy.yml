@@ -38,6 +38,11 @@ jobs:
         
     - name: Validate JavaScript (ESLint v9)
       run: npm run lint:js
+      
+    # Backup: Direct ESLint execution (if npm script fails)
+    - name: Validate JavaScript (Direct ESLint - Backup)
+      if: failure()
+      run: npx eslint src/js/
 
     # --- Lighthouse CI ---
     - name: Run Lighthouse CI
