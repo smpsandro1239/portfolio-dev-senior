@@ -96,6 +96,26 @@ portfolio-dev-senior/
 
 ## 🚀 Como Executar
 
+### 🌐 Lançar no Browser (Mais Rápido)
+
+#### Opção 1: Acesso Online Direto
+Acede directamente ao portfolio online:
+**https://smpsandro1239.github.io/portfolio-dev-senior/**
+
+#### Opção 2: Servidor Local Automático
+```bash
+# Clonar o repositório
+git clone https://github.com/smpsandro1239/portfolio-dev-senior.git
+cd portfolio-dev-senior
+
+# Instalar dependências
+npm install
+
+# Lançar servidor local (abre automaticamente no browser)
+npm run serve
+```
+O site ficará disponível em: **http://localhost:3000**
+
 ### Método Rápido (Scripts Automáticos)
 
 #### Windows
