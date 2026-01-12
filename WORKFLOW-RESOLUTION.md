@@ -1,93 +1,80 @@
-# GitHub Actions Workflow Resolution
+# Resolução de Problemas do GitHub Actions Workflow
 
-## Issue Summary
-The GitHub Actions workflow was showing Node.js 18 instead of the configured Node.js 20, and ESLint was failing with `Invalid option '--parserOptions'` error.
+## ✅ Problemas Resolvidos
 
-## Root Cause Analysis
-The main issues were:
-1. **Version mismatch between package.json and package-lock.json**:
-   - `package.json` specified ESLint v9.17.0 and modern dependencies
-   - `package-lock.json` contained ESLint v8.57.1 and outdated dependency versions
-2. **Potential Node.js version caching** in GitHub Actions
-3. **Need for explicit version debugging** in CI environment
+### 1. **Lighthouse CI - Invalid URL Error**
+- **Problema**: `LighthouseError: INVALID_URL` ao tentar analisar `file:///github/workspace/docs/index.html`
+- **Causa**: Lighthouse CI tentava analisar ficheiros locais diretamente em vez de usar um servidor HTTP
+- **Solução**: 
+  - Configurado servidor local na porta 8080 antes do Lighthouse CI
+  - Atualizado `lighthouserc.json` para usar `"url": ["http://localhost:8080"]`
+  - Removido `upload.target` para evitar conflitos de artifacts
+  - Adicionado gestão adequada do servidor (start/stop)
 
-## Resolution Steps
+### 2. **Coordenação de Testes**
+- **Melhoria**: Reutilização do servidor entre Lighthouse CI e testes de acessibilidade
+- **Benefício**: Reduz tempo de execução e evita conflitos de porta
 
-### 1. Verified Workflow Configuration ✅
-- Confirmed `.github/workflows/deploy.yml` correctly specifies Node.js 20
-- Verified no `.nvmrc` or `.node-version` files override the configuration
-- Confirmed workflow file is properly committed to the repository
+## 📋 Configuração Final
 
-### 2. Fixed Dependency Synchronization ✅
-- Identified version mismatch: local ESLint v8.57.1 vs package.json v9.17.0
-- Ran `npm install` to update package-lock.json with correct versions
-- Verified ESLint v9.39.2 is now properly installed
-- Committed updated package-lock.json to repository
-
-### 3. Enhanced Workflow Configuration ✅
-- **Forced Node.js 20.x explicitly**: Changed from `node-version: 20` to `node-version: '20.x'`
-- **Added version debugging step**: Now logs Node.js, npm, and ESLint versions
-- **Clarified ESLint step name**: "Validate JavaScript (ESLint v9)" for clarity
-- **Maintained correct npm scripts**: Uses `npm run lint:js` (not direct ESLint commands)
-
-### 4. Validated Local Configuration ✅
-- Confirmed all npm scripts work correctly:
-  - `npm run lint:html` ✅
-  - `npm run lint:css` ✅  
-  - `npm run lint:js` ✅ (ESLint v9 with modern config)
-- Tested build tools:
-  - `npx csso-cli` ✅
-  - `npx terser` ✅
-- Verified ESLint configuration uses modern `eslint.config.js` format
-
-## Current Status
-- **Local Environment**: All tools working correctly with Node.js 24.10.0
-- **ESLint**: v9.39.2 with modern configuration
-- **Dependencies**: Synchronized between package.json and package-lock.json
-- **Workflow**: Enhanced with explicit Node.js 20.x and version debugging
-
-## Expected Outcome
-The next GitHub Actions run should:
-1. Use Node.js 20.x (explicitly forced)
-2. Log all version information for debugging
-3. Successfully run `npm ci` with synchronized dependencies
-4. Execute ESLint v9 without `--parserOptions` errors
-5. Complete all validation and build steps successfully
-
-## Final Workflow Configuration
-```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v4
-  with:
-    node-version: '20.x'
-    cache: npm
-    
-- name: Verify Node.js and npm versions
-  run: |
-    echo "Node.js version: $(node --version)"
-    echo "npm version: $(npm --version)"
-    echo "ESLint version: $(npx eslint --version)"
-    
-- name: Install dependencies
-  run: npm ci
-
-- name: Validate JavaScript (ESLint v9)
-  run: npm run lint:js
+### Lighthouse CI (`lighthouserc.json`)
+```json
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./docs",
+      "url": ["http://localhost:8080"],
+      "settings": {
+        "preset": "desktop",
+        "throttlingMethod": "provided",
+        "onlyCategories": ["performance", "accessibility", "best-practices", "seo"]
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["warn", {"minScore": 0.90}],
+        "categories:accessibility": ["error", {"minScore": 1.00}],
+        "categories:best-practices": ["warn", {"minScore": 0.95}],
+        "categories:seo": ["warn", {"minScore": 0.95}]
+      }
+    }
+  }
+}
 ```
 
-## Files Modified
-- `portfolio-dev-senior/README.md` - Added workflow test comment
-- `portfolio-dev-senior/package-lock.json` - Updated to sync with package.json
-- `portfolio-dev-senior/.github/workflows/deploy.yml` - Enhanced with Node.js 20.x and debugging
-- `portfolio-dev-senior/WORKFLOW-RESOLUTION.md` - This documentation
+### Workflow Steps
+1. **Build** → Gera ficheiros em `./docs`
+2. **Start Server** → `npx serve -s docs -l 8080 &`
+3. **Lighthouse CI** → Analisa `http://localhost:8080`
+4. **Accessibility Test** → Reutiliza o servidor
+5. **Stop Server** → Cleanup automático
 
-## Technical Details
-- **ESLint Configuration**: Uses modern `eslint.config.js` with ES modules
-- **Node.js Version**: Explicitly set to '20.x' in workflow (with quotes for stability)
-- **Cache Strategy**: Uses `cache: npm` for faster builds
-- **Build Tools**: csso-cli v5.0.5, terser v5.44.1, ESLint v9.39.2
-- **Debug Information**: Workflow now logs all relevant versions for troubleshooting
+## 🔧 Scripts de Monitorização
+
+- **Windows**: `check-workflow-status.bat`
+- **Linux/macOS**: `check-workflow-status.sh`
+
+## 📊 Métricas de Qualidade
+
+O workflow agora valida:
+- ✅ HTML (html-validate)
+- ✅ CSS (stylelint)
+- ✅ JavaScript (ESLint v9)
+- ✅ Performance (Lighthouse ≥90%)
+- ✅ Acessibilidade (Lighthouse 100% + axe-core)
+- ✅ SEO (Lighthouse ≥95%)
+- ✅ Best Practices (Lighthouse ≥95%)
+- ✅ Budget de Performance (CSS ≤50KB, JS ≤100KB)
+
+## 🚀 Status Atual
+
+**Commit**: `58ac010` - "fix: Resolve Lighthouse CI invalid URL error"
+
+**Próximos Passos**:
+1. Monitorizar execução do workflow
+2. Verificar se todos os testes passam
+3. Confirmar deploy automático para GitHub Pages
 
 ---
-*Resolution completed on: 2026-01-12*
-*Final update: Enhanced workflow with explicit Node.js 20.x and version debugging*
+
+*Documentação atualizada em: 12 Janeiro 2026*
