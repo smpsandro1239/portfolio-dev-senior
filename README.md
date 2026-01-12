@@ -289,6 +289,99 @@ O build é automatizado via GitHub Actions:
 - [x] Minificação de assets
 - [x] Deploy para GitHub Pages
 
+## 🛠️ Resolução de Problemas
+
+### ESLint Configuration Issues
+
+Se encontrares erros relacionados com ESLint durante o desenvolvimento ou CI/CD:
+
+#### Problema: `Invalid option '--parserOptions'`
+```bash
+# Erro comum em versões antigas do ESLint
+Invalid option '--parserOptions' - perhaps you meant '--parser-options'?
+```
+
+**Solução**: O projeto usa ESLint v9+ com configuração moderna (`eslint.config.js`). Certifica-te de que:
+
+1. **Node.js ≥ 20**: O projeto requer Node.js 20 ou superior
+2. **Dependências atualizadas**: Execute `npm ci` para instalar as versões corretas
+3. **Scripts npm**: Use sempre `npm run lint:js` em vez de comandos ESLint diretos
+
+#### Problema: Glob patterns não funcionam no Windows
+```bash
+# Erro: No files matching the pattern "'src/js/*.js'" were found
+```
+
+**Solução**: O `package.json` usa aspas duplas para compatibilidade Windows/Linux:
+```json
+{
+  "scripts": {
+    "lint:js": "eslint \"src/js/*.js\""
+  }
+}
+```
+
+#### Problema: Browser globals não definidos
+```bash
+# Erros como: 'setTimeout' is not defined, 'document' is not defined
+```
+
+**Solução**: O `eslint.config.js` inclui todos os globals necessários:
+```javascript
+globals: {
+  window: 'readonly',
+  document: 'readonly',
+  setTimeout: 'readonly',
+  performance: 'readonly',
+  // ... outros globals
+}
+```
+
+### GitHub Actions Troubleshooting
+
+#### Problema: Workflow falha na validação JavaScript
+1. Verifica se o `package-lock.json` está commitado
+2. Confirma que o Node.js é versão 20 no workflow
+3. Certifica-te de que todos os scripts npm estão definidos corretamente
+
+#### Problema: Deploy falha
+1. Verifica se GitHub Pages está ativado no repositório
+2. Confirma que o branch `main` é o source branch
+3. Verifica se o `GITHUB_TOKEN` tem permissões adequadas
+
+### Performance Issues
+
+#### Problema: Lighthouse scores baixos
+1. **Performance**: Verifica se as imagens estão otimizadas
+2. **Accessibility**: Confirma que todos os elementos têm labels apropriados
+3. **Best Practices**: Certifica-te de que HTTPS está ativo
+
+#### Problema: JavaScript não carrega
+1. Verifica se o servidor suporta módulos ES6
+2. Confirma que os paths dos imports estão corretos
+3. Usa sempre extensões `.js` nos imports
+
+### Desenvolvimento Local
+
+#### Problema: CORS errors
+**Solução**: Nunca abras `index.html` diretamente no browser. Usa sempre um servidor local:
+```bash
+# Opção 1: Python
+python -m http.server 8000
+
+# Opção 2: Node.js
+npx serve src -p 8000
+
+# Opção 3: npm script
+npm run serve
+```
+
+#### Problema: Módulos ES6 não funcionam
+**Solução**: Certifica-te de que:
+1. O servidor está a servir ficheiros com MIME type correto
+2. Os imports usam extensões `.js`
+3. O HTML inclui `type="module"` nas tags script
+
 ## 📈 Próximas Melhorias
 
 - [ ] Service Worker para cache offline
