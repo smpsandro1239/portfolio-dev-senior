@@ -2,7 +2,6 @@
   "ci": {
     "collect": {
       "staticDistDir": "./docs",
-      "url": ["file:///github/workspace/docs/index.html"],
       "settings": {
         "preset": "desktop",
         "throttlingMethod": "provided",

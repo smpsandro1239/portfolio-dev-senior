@@ -44,14 +44,6 @@ jobs:
       if: failure()
       run: npx eslint src/js/
 
-    # --- Lighthouse CI ---
-    - name: Run Lighthouse CI
-      uses: treosh/lighthouse-ci-action@v10
-      with:
-        configPath: './lighthouserc.json'
-        uploadArtifacts: true
-        temporaryPublicStorage: true
-
     # --- Build dos assets de produção ---
     - name: Build production assets
       run: |
@@ -74,6 +66,14 @@ jobs:
         fi
         
         touch docs/.nojekyll
+
+    # --- Lighthouse CI (após build) ---
+    - name: Run Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        configPath: './lighthouserc.json'
+        uploadArtifacts: true
+        temporaryPublicStorage: true
 
     # --- Verificação de budget de performance ---
     - name: Performance Budget Check
