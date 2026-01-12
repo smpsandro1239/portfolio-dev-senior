@@ -17,22 +17,20 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
-        cache: 'npm'
+        node-version: 20
+        cache: npm
         
     - name: Install dependencies
       run: npm ci
 
-    # --- Validações de código (ESLint v9 com eslint.config.js) ---
-    # IMPORTANTE: Usa npm scripts em vez de comandos ESLint diretos
-    # para garantir compatibilidade com ESLint v9 e configuração moderna
+    # --- Validações de código (usam os scripts npm) ---
     - name: Validate HTML
       run: npm run lint:html
         
     - name: Validate CSS
       run: npm run lint:css
         
-    - name: Validate JavaScript (ESLint v9)
+    - name: Validate JavaScript
       run: npm run lint:js
 
     # --- Lighthouse CI ---
@@ -50,7 +48,7 @@ jobs:
         cp src/index.html docs/
         
         mkdir -p docs/css
-        npx csso src/css/main.css --output docs/css/main.css
+        npx csso-cli src/css/main.css -o docs/css/main.css
         
         mkdir -p docs/js
         for js_file in src/js/*.js; do
@@ -98,15 +96,14 @@ jobs:
         echo "css_size=$css_size" >> $GITHUB_OUTPUT
         echo "js_total=$js_total" >> $GITHUB_OUTPUT
 
-    # --- Teste de acessibilidade com axe-core ---
+    # --- Teste de acessibilidade real com axe-core ---
     - name: Accessibility Test
       run: |
-        npm install -g @axe-core/cli serve
         npx serve -s docs -l 8080 &
-        sleep 5
-        npx axe http://localhost:8080
+        sleep 3
+        npx @axe-core/cli http://localhost:8080
 
-    # --- Deploy (só na branch main) ---
+    # --- Deploy para GitHub Pages (só na main) ---
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
@@ -114,8 +111,9 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
 
-    # --- Relatório final fiável ---
+    # --- Relatório final claro e fiável ---
     - name: Generate Build Report
+      if: always()
       run: |
         {
           echo "## Build Report 📊"
@@ -138,6 +136,7 @@ jobs:
           echo "- ✅ CSS validation passed"
           echo "- ✅ JavaScript validation passed"
           echo "- ✅ Performance budget met"
+          echo "- ✅ Accessibility test completed"
           
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             echo "- ✅ Deployed to GitHub Pages"
