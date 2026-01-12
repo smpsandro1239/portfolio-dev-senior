@@ -1,6 +1,15 @@
 # Portfolio Profissional - Sandro Pereira
 
+[![Build and Deploy](https://github.com/smpsandro1239/portfolio-dev-senior/actions/workflows/deploy.yml/badge.svg)](https://github.com/smpsandro1239/portfolio-dev-senior/actions/workflows/deploy.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://smpsandro1239.github.io/portfolio-dev-senior/)
+
 Portfolio técnico pessoal desenvolvido exclusivamente com **HTML5, CSS3 e JavaScript ES6+ vanilla**, que demonstra competências de nível sénior em engenharia frontend, arquitetura web e boas práticas modernas.
+
+## 🌐 Acesso Online
+
+**Portfolio disponível em:** [https://smpsandro1239.github.io/portfolio-dev-senior/](https://smpsandro1239.github.io/portfolio-dev-senior/)
+
+O site é automaticamente implementado via GitHub Actions sempre que há alterações no branch `main`.
 
 ## 🎯 Objetivo
 
