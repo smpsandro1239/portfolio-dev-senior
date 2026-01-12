@@ -284,12 +284,12 @@ export class GitHubApiClient {
      * Set data in cache with timestamp
      */
     setCachedData(key, value) {
+        const data = {
+            value,
+            timestamp: Date.now()
+        };
+        
         try {
-            const data = {
-                value,
-                timestamp: Date.now()
-            };
-            
             sessionStorage.setItem(key, JSON.stringify(data));
             
         } catch (error) {

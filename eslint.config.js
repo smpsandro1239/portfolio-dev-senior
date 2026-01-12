@@ -16,7 +16,18 @@ export default [
         URL: 'readonly',
         URLSearchParams: 'readonly',
         IntersectionObserver: 'readonly',
-        matchMedia: 'readonly'
+        matchMedia: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly',
+        AbortController: 'readonly',
+        performance: 'readonly',
+        navigator: 'readonly',
+        history: 'readonly',
+        CustomEvent: 'readonly'
       }
     },
     rules: {
