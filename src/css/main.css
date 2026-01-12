@@ -907,6 +907,7 @@ a:focus {
 
 .contact__icon {
   font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
 }
 
 /* ==========================================================================
@@ -960,6 +961,7 @@ a:focus {
 
 .badge__icon {
   font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
 }
 
 /* ==========================================================================
