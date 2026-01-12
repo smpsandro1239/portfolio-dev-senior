@@ -21,24 +21,16 @@ jobs:
         cache: 'npm'
         
     - name: Install dependencies
-      run: |
-        npm install -g html-validate
-        npm install -g stylelint stylelint-config-standard
-        npm install -g eslint
-        npm install -g terser
-        npm install -g csso-cli
+      run: npm ci
         
     - name: Validate HTML
-      run: |
-        html-validate src/index.html
+      run: npx html-validate src/index.html
         
     - name: Validate CSS
-      run: |
-        stylelint "src/css/*.css" --config-basedir .
+      run: npx stylelint "src/css/*.css" --config-basedir .
         
     - name: Validate JavaScript
-      run: |
-        eslint src/js/*.js --env browser,es6 --parserOptions ecmaVersion:2020,sourceType:module
+      run: npx eslint src/js/*.js --env browser,es6 --parserOptions ecmaVersion:2020,sourceType:module
         
     - name: Run Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
@@ -57,15 +49,15 @@ jobs:
         
         # Create CSS directory and minify CSS
         mkdir -p docs/css
-        csso src/css/main.css --output docs/css/main.css
+        npx csso src/css/main.css --output docs/css/main.css
         
         # Create JS directory and minify JavaScript
         mkdir -p docs/js
-        terser src/js/main.js --compress --mangle --output docs/js/main.js
-        terser src/js/theme-manager.js --compress --mangle --output docs/js/theme-manager.js
-        terser src/js/navigation.js --compress --mangle --output docs/js/navigation.js
-        terser src/js/github-api.js --compress --mangle --output docs/js/github-api.js
-        terser src/js/animation-controller.js --compress --mangle --output docs/js/animation-controller.js
+        npx terser src/js/main.js --compress --mangle --output docs/js/main.js
+        npx terser src/js/theme-manager.js --compress --mangle --output docs/js/theme-manager.js
+        npx terser src/js/navigation.js --compress --mangle --output docs/js/navigation.js
+        npx terser src/js/github-api.js --compress --mangle --output docs/js/github-api.js
+        npx terser src/js/animation-controller.js --compress --mangle --output docs/js/animation-controller.js
         
         # Copy images if they exist
         if [ -d "src/img" ]; then
