@@ -68,12 +68,26 @@ jobs:
         touch docs/.nojekyll
 
     # --- Lighthouse CI (após build) ---
+    - name: Start local server for Lighthouse
+      run: |
+        npx serve -s docs -l 8080 &
+        echo $! > server.pid
+        sleep 5
+        
     - name: Run Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
       with:
         configPath: './lighthouserc.json'
-        uploadArtifacts: true
-        temporaryPublicStorage: true
+        uploadArtifacts: false
+        temporaryPublicStorage: false
+        
+    - name: Stop local server
+      if: always()
+      run: |
+        if [ -f server.pid ]; then
+          kill $(cat server.pid) || true
+          rm server.pid
+        fi
 
     # --- Verificação de budget de performance ---
     - name: Performance Budget Check
@@ -110,8 +124,7 @@ jobs:
     # --- Teste de acessibilidade real com axe-core ---
     - name: Accessibility Test
       run: |
-        npx serve -s docs -l 8080 &
-        sleep 3
+        # Server is already running from Lighthouse step
         npx @axe-core/cli http://localhost:8080
 
     # --- Deploy para GitHub Pages (só na main) ---

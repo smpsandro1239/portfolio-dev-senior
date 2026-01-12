@@ -2,6 +2,7 @@
   "ci": {
     "collect": {
       "staticDistDir": "./docs",
+      "url": ["http://localhost:8080"],
       "settings": {
         "preset": "desktop",
         "throttlingMethod": "provided",
@@ -20,9 +21,6 @@
         "meta-description": ["warn"],
         "tap-targets": ["warn"]
       }
-    },
-    "upload": {
-      "target": "temporary-public-storage"
     }
   }
 }
