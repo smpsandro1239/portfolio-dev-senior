@@ -1,5 +1,6 @@
 # Portfolio Profissional - Sandro Pereira
 
+<!-- Workflow test: Node.js 20 + ESLint v9 configuration -->
 [![Build and Deploy](https://github.com/smpsandro1239/portfolio-dev-senior/actions/workflows/deploy.yml/badge.svg)](https://github.com/smpsandro1239/portfolio-dev-senior/actions/workflows/deploy.yml)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://smpsandro1239.github.io/portfolio-dev-senior/)
 
