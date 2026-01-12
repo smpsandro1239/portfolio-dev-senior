@@ -30,7 +30,7 @@ jobs:
       run: npx stylelint "src/css/*.css" || echo "CSS validation failed but continuing"
         
     - name: Validate JavaScript
-      run: npx eslint src/js/*.js --env browser,es6 --parserOptions ecmaVersion:2020,sourceType:module
+      run: npx eslint src/js/*.js --env browser,es6 --parser-options ecmaVersion=2020,sourceType=module
         
     - name: Run Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
