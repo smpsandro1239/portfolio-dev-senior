@@ -22,64 +22,54 @@ jobs:
         
     - name: Install dependencies
       run: npm ci
-        
+
+    # --- Validações de código ---
     - name: Validate HTML
       run: npx html-validate src/index.html
         
     - name: Validate CSS
-      run: npx stylelint "src/css/*.css" || echo "CSS validation failed but continuing"
+      run: npx stylelint "src/css/*.css"
+      # Remove o "|| ..." para falhar em caso de erro
         
     - name: Validate JavaScript
       run: npx eslint src/js/*.js
-        
+    # --- Lighthouse CI ---
     - name: Run Lighthouse CI
       uses: treosh/lighthouse-ci-action@v10
       with:
         configPath: './lighthouserc.json'
         uploadArtifacts: true
         temporaryPublicStorage: true
-        
+
+    # --- Build dos assets de produção ---
     - name: Build production assets
       run: |
-        # Create docs directory for GitHub Pages
         mkdir -p docs
-        
-        # Copy HTML
         cp src/index.html docs/
         
-        # Create CSS directory and minify CSS
         mkdir -p docs/css
         npx csso src/css/main.css --output docs/css/main.css
         
-        # Create JS directory and minify JavaScript
         mkdir -p docs/js
-        npx terser src/js/main.js --compress --mangle --output docs/js/main.js
-        npx terser src/js/theme-manager.js --compress --mangle --output docs/js/theme-manager.js
-        npx terser src/js/navigation.js --compress --mangle --output docs/js/navigation.js
-        npx terser src/js/github-api.js --compress --mangle --output docs/js/github-api.js
-        npx terser src/js/animation-controller.js --compress --mangle --output docs/js/animation-controller.js
+        for js_file in src/js/*.js; do
+          if [ -f "$js_file" ]; then
+            filename=$(basename "$js_file")
+            npx terser "$js_file" --compress --mangle --output "docs/js/$filename"
+          fi
+        done
         
-        # Copy images if they exist
         if [ -d "src/img" ]; then
           cp -r src/img docs/
         fi
         
-        # Create .nojekyll file for GitHub Pages
         touch docs/.nojekyll
-        
-    - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
-        
+
+    # --- Verificação de budget de performance ---
     - name: Performance Budget Check
+      id: perf-check
       run: |
-        # Check file sizes
         echo "Checking performance budget..."
         
-        # CSS should be under 50KB
         css_size=$(stat -c%s docs/css/main.css)
         if [ $css_size -gt 51200 ]; then
           echo "❌ CSS file too large: ${css_size} bytes (limit: 50KB)"
@@ -88,11 +78,12 @@ jobs:
           echo "✅ CSS size OK: ${css_size} bytes"
         fi
         
-        # JavaScript should be under 100KB total
         js_total=0
         for file in docs/js/*.js; do
-          size=$(stat -c%s "$file")
-          js_total=$((js_total + size))
+          if [ -f "$file" ]; then
+            size=$(stat -c%s "$file")
+            js_total=$((js_total + size))
+          fi
         done
         
         if [ $js_total -gt 102400 ]; then
@@ -102,38 +93,54 @@ jobs:
           echo "✅ JavaScript size OK: ${js_total} bytes"
         fi
         
+        echo "css_size=$css_size" >> $GITHUB_OUTPUT
+        echo "js_total=$js_total" >> $GITHUB_OUTPUT
+
+    # --- Teste de acessibilidade com axe-core ---
     - name: Accessibility Test
       run: |
-        # Install axe-core CLI
-        npm install -g @axe-core/cli
-        
-        # Run accessibility tests (would need a server running)
-        echo "Accessibility tests would run here with axe-core"
-        echo "✅ Accessibility checks configured"
-        
+        npm install -g @axe-core/cli serve
+        npx serve -s docs -l 8080 &
+        sleep 5
+        npx axe http://localhost:8080
+
+    # --- Deploy (só na branch main) ---
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+
+    # --- Relatório final fiável ---
     - name: Generate Build Report
       run: |
-        echo "## Build Report 📊" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### File Sizes" >> $GITHUB_STEP_SUMMARY
-        echo "| File | Size |" >> $GITHUB_STEP_SUMMARY
-        echo "|------|------|" >> $GITHUB_STEP_SUMMARY
-        
-        for file in docs/css/*.css docs/js/*.js; do
-          if [ -f "$file" ]; then
-            size=$(stat -c%s "$file")
-            filename=$(basename "$file")
-            echo "| $filename | ${size} bytes |" >> $GITHUB_STEP_SUMMARY
+        {
+          echo "## Build Report 📊"
+          echo ""
+          echo "### File Sizes"
+          echo "| File | Size (bytes) |"
+          echo "|------|--------------|"
+          
+          for file in docs/css/*.css docs/js/*.js; do
+            if [ -f "$file" ]; then
+              size=$(stat -c%s "$file")
+              filename=$(basename "$file")
+              echo "| $filename | $size |"
+            fi
+          done
+          
+          echo ""
+          echo "### Validation Results"
+          echo "- ✅ HTML validation passed"
+          echo "- ✅ CSS validation passed"
+          echo "- ✅ JavaScript validation passed"
+          echo "- ✅ Performance budget met"
+          
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "- ✅ Deployed to GitHub Pages"
           fi
-        done
-        
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### Validation Results" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ HTML validation passed" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ CSS validation passed" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ JavaScript validation passed" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Performance budget met" >> $GITHUB_STEP_SUMMARY
-        
-        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-          echo "- ✅ Deployed to GitHub Pages" >> $GITHUB_STEP_SUMMARY
-        fi
+          
+          echo ""
+          echo "> Report generated on $(date -u '+%Y-%m-%d at %H:%M UTC')"
+        } >> $GITHUB_STEP_SUMMARY
