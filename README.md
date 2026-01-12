@@ -1,6 +1,6 @@
 # Portfolio Profissional - Sandro Pereira
 
-Portfolio técnico pessoal desenvolvido exclusivamente com **HTML5, CSS3 e JavaScript ES6+ vanilla**, demonstrando competências de nível sénior em engenharia frontend, arquitetura web e boas práticas modernas.
+Portfolio técnico pessoal desenvolvido exclusivamente com **HTML5, CSS3 e JavaScript ES6+ vanilla**, que demonstra competências de nível sénior em engenharia frontend, arquitetura web e boas práticas modernas.
 
 ## 🎯 Objetivo
 
@@ -36,7 +36,7 @@ Este portfolio serve como **prova viva de competência técnica**, não apenas c
 ### 🎨 Funcionalidades Avançadas
 - **Tema claro/escuro** com detecção automática de preferências
 - **Integração GitHub API** com cache inteligente
-- **Animações performantes** respeitando `prefers-reduced-motion`
+- **Animações performantes** que respeitam `prefers-reduced-motion`
 - **Navegação suave** entre secções
 
 ## 🏗️ Arquitetura
@@ -96,21 +96,92 @@ portfolio-dev-senior/
 
 ## 🚀 Como Executar
 
-### Desenvolvimento Local
+### Método Rápido (Scripts Automáticos)
+
+#### Windows
 ```bash
 # Clonar o repositório
 git clone https://github.com/smpsandro1239/portfolio-dev-senior.git
 cd portfolio-dev-senior
 
-# Servir ficheiros localmente (Python)
-python -m http.server 8000 -d src
+# Executar script automático
+lancar-portfolio.bat
+```
 
-# Ou usar Node.js
-npx serve src
+#### macOS/Linux
+```bash
+# Clonar o repositório
+git clone https://github.com/smpsandro1239/portfolio-dev-senior.git
+cd portfolio-dev-senior
+
+# Dar permissões ao script
+chmod +x lancar-portfolio.sh
+
+# Executar script automático
+./lancar-portfolio.sh
+```
+
+### Desenvolvimento Local (Manual)
+
+#### Opção 1: Python (Recomendado)
+```bash
+# Clonar o repositório
+git clone https://github.com/smpsandro1239/portfolio-dev-senior.git
+cd portfolio-dev-senior
+
+# Navegar para a pasta src
+cd src
+
+# Servir ficheiros localmente com Python
+python -m http.server 8000
 
 # Abrir no browser
-open http://localhost:8000
+# Windows: start http://localhost:8000
+# macOS: open http://localhost:8000
+# Linux: xdg-open http://localhost:8000
 ```
+
+#### Opção 2: Node.js
+```bash
+# Clonar o repositório
+git clone https://github.com/smpsandro1239/portfolio-dev-senior.git
+cd portfolio-dev-senior
+
+# Instalar serve globalmente (se ainda não tiver)
+npm install -g serve
+
+# Servir a pasta src
+serve src -p 8000
+
+# Abrir http://localhost:8000 no browser
+```
+
+#### Opção 3: Live Server (VS Code)
+```bash
+# Clonar o repositório
+git clone https://github.com/smpsandro1239/portfolio-dev-senior.git
+cd portfolio-dev-senior
+
+# Abrir no VS Code
+code .
+
+# Instalar extensão "Live Server" se ainda não tiver
+# Clicar com botão direito em src/index.html
+# Selecionar "Open with Live Server"
+```
+
+### Acesso Online
+O portfólio está disponível online em: **https://smpsandro1239.github.io/portfolio-dev-senior/**
+
+### Deploy Gratuito
+Podes hospedar este portfólio **gratuitamente** em várias plataformas:
+
+- 🌟 **GitHub Pages** (Recomendado) - Ver [DEPLOY-RAPIDO.md](DEPLOY-RAPIDO.md)
+- 🌟 **Netlify** - Deploy em 30 segundos
+- 🌟 **Vercel** - Performance excepcional
+- 🌟 **Firebase Hosting** - CDN global
+
+📖 **Guia completo**: [DEPLOY-GRATUITO.md](DEPLOY-GRATUITO.md)
 
 ### Build de Produção
 O build é automatizado via GitHub Actions:
@@ -210,8 +281,8 @@ MIT License - ver [LICENSE](LICENSE) para detalhes.
 **Sandro Pereira**  
 Arquiteto de Software & Formador de TI
 
-- 📧 Email: [sandro@exemplo.com](mailto:sandro@exemplo.com)
-- 💼 LinkedIn: [linkedin.com/in/sandro-pereira](https://linkedin.com/in/sandro-pereira)
+- 📧 Email: [smpsandro1239@gmail.com](mailto:smpsandro1239@gmail.com)
+- 💼 LinkedIn: [linkedin.com/in/sandro-pereira-a5ab0236](https://linkedin.com/in/sandro-pereira-a5ab0236)
 - 🔗 GitHub: [github.com/smpsandro1239](https://github.com/smpsandro1239)
 
 ---
