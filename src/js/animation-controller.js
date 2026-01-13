@@ -128,7 +128,7 @@ export class AnimationController {
         });
         
         // Animate elements with staggered timing
-        containers.forEach((elements, containerKey) => {
+        containers.forEach((elements) => {
             this.animateElementsWithStagger(elements);
         });
     }

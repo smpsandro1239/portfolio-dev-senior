@@ -305,7 +305,6 @@ class PortfolioApp {
         const header = document.querySelector('.header');
         if (!header) return;
         
-        let lastScrollY = window.scrollY;
         let ticking = false;
         
         const updateHeader = () => {
@@ -317,7 +316,6 @@ class PortfolioApp {
                 header.classList.remove('scrolled');
             }
             
-            lastScrollY = scrollY;
             ticking = false;
         };
         

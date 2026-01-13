@@ -127,10 +127,21 @@ jobs:
         # Server is already running from Lighthouse step
         npx @axe-core/cli http://localhost:8080
 
+    # --- Verificação da pasta docs antes do deploy ---
+    - name: Verify docs directory
+      run: |
+        echo "Verificando conteúdo da pasta docs..."
+        ls -la docs/
+        if [ ! -f docs/index.html ]; then
+          echo "❌ index.html em falta na pasta docs/ — build pode ter falhou"
+          exit 1
+        fi
+        echo "✅ docs/index.html encontrado"
+
     # --- Deploy para GitHub Pages (só na main) ---
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
