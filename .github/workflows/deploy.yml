@@ -10,6 +10,12 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
+    # Permissões explícitas necessárias para GitHub Pages deployment
+    permissions:
+      contents: write  # Necessário para push ao branch gh-pages
+      pages: write     # Necessário para GitHub Pages
+      id-token: write  # Necessário para autenticação
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
