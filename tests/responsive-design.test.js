@@ -181,11 +181,11 @@ describe('Property 6: Responsive Design Consistency', () => {
     });
     
     test('should have proper semantic HTML structure', () => {
-        // Check for semantic HTML5 elements
-        expect(htmlContent).toMatch(/<header[^>]*role="banner"/);
-        expect(htmlContent).toMatch(/<nav[^>]*role="navigation"/);
-        expect(htmlContent).toMatch(/<main[^>]*role="main"/);
-        expect(htmlContent).toMatch(/<footer[^>]*role="contentinfo"/);
+        // Check for semantic HTML5 elements (implicit roles)
+        expect(htmlContent).toMatch(/<header[^>]*class="header"/);
+        expect(htmlContent).toMatch(/<nav[^>]*aria-label="Navegação principal"/);
+        expect(htmlContent).toMatch(/<main[^>]*id="main-content"/);
+        expect(htmlContent).toMatch(/<footer[^>]*class="footer"/);
         
         // Check for proper heading hierarchy
         expect(htmlContent).toMatch(/<h1/);

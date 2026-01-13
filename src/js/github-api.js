@@ -83,15 +83,26 @@ export class GitHubApiClient {
      * Process and filter repositories
      */
     processRepositories(repositories) {
-        return repositories
+        // Define the pinned repositories in order of priority
+        const pinnedRepos = [
+            'IOT',
+            'empregabilidade-amar-terra-verde', 
+            'IOTCNT',
+            'TimeAdministrator',
+            'portfolio-dev-senior',
+            'curso-js-2026-pt'
+        ];
+        
+        // Filter repositories to only include pinned ones
+        const filteredRepos = repositories
             .filter(repo => {
-                // Filter out forks and archived repos
-                return !repo.fork && !repo.archived;
+                // Only include non-fork, non-archived repos that are in our pinned list
+                return !repo.fork && !repo.archived && pinnedRepos.includes(repo.name);
             })
             .map(repo => ({
                 id: repo.id,
                 name: repo.name,
-                description: repo.description,
+                description: repo.description || this.getDefaultDescription(repo.name),
                 html_url: repo.html_url,
                 language: repo.language,
                 topics: repo.topics || [],
@@ -99,15 +110,32 @@ export class GitHubApiClient {
                 forks_count: repo.forks_count,
                 updated_at: repo.updated_at,
                 created_at: repo.created_at,
-                size: repo.size
-            }))
-            .sort((a, b) => {
-                // Sort by stars first, then by update date
-                if (a.stargazers_count !== b.stargazers_count) {
-                    return b.stargazers_count - a.stargazers_count;
-                }
-                return new Date(b.updated_at) - new Date(a.updated_at);
-            });
+                size: repo.size,
+                visibility: repo.private ? 'Private' : 'Public'
+            }));
+        
+        // Sort by the pinned order
+        return filteredRepos.sort((a, b) => {
+            const aIndex = pinnedRepos.indexOf(a.name);
+            const bIndex = pinnedRepos.indexOf(b.name);
+            return aIndex - bIndex;
+        });
+    }
+    
+    /**
+     * Get default description for repositories without description
+     */
+    getDefaultDescription(repoName) {
+        const descriptions = {
+            'IOT': 'Projetos e soluções IoT com ESP32, sensores e conectividade LoRa',
+            'empregabilidade-amar-terra-verde': 'Sistema web para gestão de empregabilidade e sustentabilidade ambiental',
+            'IOTCNT': 'Contador inteligente IoT com interface web e monitorização remota',
+            'TimeAdministrator': 'Aplicação TypeScript para gestão e administração de tempo',
+            'portfolio-dev-senior': 'Portfolio profissional desenvolvido com HTML5, CSS3 e JavaScript vanilla',
+            'curso-js-2026-pt': 'Curso completo de JavaScript moderno em português europeu'
+        };
+        
+        return descriptions[repoName] || 'Projeto de desenvolvimento de software';
     }
     
     /**
