@@ -770,6 +770,7 @@ a:focus {
   flex-direction: column;
   gap: var(--space-8);
   align-items: center;
+  position: relative;
 }
 
 .stats-grid {
@@ -788,6 +789,11 @@ a:focus {
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-card:hover {
@@ -812,6 +818,11 @@ a:focus {
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stats-streak:hover {
@@ -836,6 +847,11 @@ a:focus {
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stats-profile:hover {
@@ -860,6 +876,11 @@ a:focus {
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stats-activity:hover {
@@ -872,6 +893,85 @@ a:focus {
   height: auto;
   display: block;
   border-radius: var(--radius-lg);
+}
+
+/* GitHub Stats Loading and Error States */
+.stats-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  color: var(--color-text-secondary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--space-4);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.stats-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+  opacity: 0.6;
+}
+
+.retry-btn {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  margin-top: var(--space-4);
+}
+
+.retry-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.stats-refresh-btn {
+  background: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--space-6);
+}
+
+.stats-refresh-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--color-bg-alt);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* ==========================================================================
