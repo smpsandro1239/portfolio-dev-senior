@@ -1019,6 +1019,148 @@ a:focus {
 }
 
 /* ==========================================================================
+   Quality Metrics Section
+   ========================================================================== */
+
+.section--quality {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-alt) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section--quality::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hero);
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.quality-metrics {
+  position: relative;
+  z-index: 1;
+}
+
+.quality-intro {
+  text-align: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-10);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: var(--line-height-relaxed);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+.metric-card {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-success);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-colored);
+  border-color: var(--color-success);
+}
+
+.metric-card:hover::before {
+  opacity: 1;
+}
+
+.metric-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.metric-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.metric-status {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-status--pass {
+  background: linear-gradient(135deg, var(--color-success) 0%, #22c55e 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+.metric-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.quality-footer {
+  text-align: center;
+  padding: var(--space-8);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.quality-footer::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.quality-note {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==========================================================================
    Course Section
    ========================================================================== */
 
@@ -1307,6 +1449,10 @@ a:focus {
     grid-template-columns: repeat(2, 1fr);
   }
   
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .projects {
     gap: var(--space-8);
   }
@@ -1354,11 +1500,19 @@ a:focus {
   .projects {
     gap: var(--space-8);
   }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Desktop (1200px+) */
 @media (min-width: 1200px) {
   .specializations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .metrics-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }

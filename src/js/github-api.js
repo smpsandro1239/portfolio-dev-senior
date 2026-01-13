@@ -93,8 +93,8 @@ export class GitHubApiClient {
             'curso-js-2026-pt'
         ];
         
-        // Filter repositories to only include pinned ones
-        const filteredRepos = repositories
+        // First, try to get all repositories (including private ones if accessible)
+        let filteredRepos = repositories
             .filter(repo => {
                 // Only include non-fork, non-archived repos that are in our pinned list
                 return !repo.fork && !repo.archived && pinnedRepos.includes(repo.name);
@@ -114,12 +114,36 @@ export class GitHubApiClient {
                 visibility: repo.private ? 'Private' : 'Public'
             }));
         
+        // If we don't have all 6 repositories, create placeholder entries for missing ones
+        if (filteredRepos.length < 6) {
+            const foundRepoNames = filteredRepos.map(repo => repo.name);
+            const missingRepos = pinnedRepos.filter(name => !foundRepoNames.includes(name));
+            
+            missingRepos.forEach(repoName => {
+                filteredRepos.push({
+                    id: `placeholder-${repoName}`,
+                    name: repoName,
+                    description: this.getDefaultDescription(repoName),
+                    html_url: `https://github.com/smpsandro1239/${repoName}`,
+                    language: this.getDefaultLanguage(repoName),
+                    topics: [],
+                    stargazers_count: 0,
+                    forks_count: 0,
+                    updated_at: new Date().toISOString(),
+                    created_at: new Date().toISOString(),
+                    size: 0,
+                    visibility: 'Public',
+                    isPlaceholder: true
+                });
+            });
+        }
+        
         // Sort by the pinned order
         return filteredRepos.sort((a, b) => {
             const aIndex = pinnedRepos.indexOf(a.name);
             const bIndex = pinnedRepos.indexOf(b.name);
             return aIndex - bIndex;
-        });
+        }).slice(0, 6); // Ensure we only return 6 projects
     }
     
     /**
@@ -136,6 +160,22 @@ export class GitHubApiClient {
         };
         
         return descriptions[repoName] || 'Projeto de desenvolvimento de software';
+    }
+    
+    /**
+     * Get default language for repositories
+     */
+    getDefaultLanguage(repoName) {
+        const languages = {
+            'IOT': 'C++',
+            'empregabilidade-amar-terra-verde': 'JavaScript',
+            'IOTCNT': 'C++',
+            'TimeAdministrator': 'TypeScript',
+            'portfolio-dev-senior': 'HTML',
+            'curso-js-2026-pt': 'JavaScript'
+        };
+        
+        return languages[repoName] || 'JavaScript';
     }
     
     /**

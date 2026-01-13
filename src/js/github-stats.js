@@ -7,20 +7,20 @@ class GitHubStatsHandler {
     constructor() {
         this.statsConfig = {
             'github-stats': {
-                primary: 'https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true',
-                fallback: 'https://github-readme-stats.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true'
+                primary: 'https://github-readme-stats.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true',
+                fallback: 'https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true'
             },
             'top-langs': {
-                primary: 'https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=smpsandro1239&layout=compact&theme=radical&hide_border=true&title_color=667eea&text_color=ffffff&bg_color=0a0a0a',
-                fallback: 'https://github-readme-stats.vercel.app/api/top-langs/?username=smpsandro1239&layout=compact&theme=radical&hide_border=true&title_color=667eea&text_color=ffffff&bg_color=0a0a0a'
+                primary: 'https://github-readme-stats.vercel.app/api/top-langs/?username=smpsandro1239&layout=compact&theme=radical&hide_border=true&title_color=667eea&text_color=ffffff&bg_color=0a0a0a',
+                fallback: 'https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=smpsandro1239&layout=compact&theme=radical&hide_border=true&title_color=667eea&text_color=ffffff&bg_color=0a0a0a'
             },
             'profile-summary': {
                 primary: 'https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=smpsandro1239&theme=radical',
                 fallback: 'https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=smpsandro1239&theme=radical'
             },
             'streak-stats': {
-                primary: 'https://streak-stats.demolab.com?user=smpsandro1239&theme=radical&hide_border=true&stroke=667eea&background=0a0a0a&fire=667eea&currStreakNum=667eea',
-                fallback: 'https://github-readme-streak-stats.herokuapp.com/?user=smpsandro1239&theme=radical&hide_border=true&stroke=667eea&background=0a0a0a&fire=667eea&currStreakNum=667eea'
+                primary: 'https://github-readme-streak-stats.herokuapp.com/?user=smpsandro1239&theme=radical&hide_border=true&stroke=667eea&background=0a0a0a&fire=667eea&currStreakNum=667eea',
+                fallback: 'https://streak-stats.demolab.com?user=smpsandro1239&theme=radical&hide_border=true&stroke=667eea&background=0a0a0a&fire=667eea&currStreakNum=667eea'
             },
             'activity-graph': {
                 primary: 'https://github-readme-activity-graph.vercel.app/graph?username=smpsandro1239&theme=react-dark&bg_color=0a0a0a&color=667eea&line=667eea&point=ffffff&hide_border=true&area=true',
@@ -195,7 +195,7 @@ class GitHubStatsHandler {
         errorDiv.innerHTML = `
             <div class="error-icon">📊</div>
             <p>${this.getDisplayName(statsType)} temporariamente indisponível</p>
-            <button class="retry-btn" onclick="githubStats.retryImage('${statsType}')">
+            <button class="retry-btn" onclick="window.githubStatsHandler.retryImage('${statsType}')">
                 Tentar novamente
             </button>
         `;
@@ -261,7 +261,9 @@ class GitHubStatsHandler {
             const refreshBtn = document.createElement('button');
             refreshBtn.className = 'stats-refresh-btn';
             refreshBtn.innerHTML = '🔄 Atualizar Estatísticas';
-            refreshBtn.onclick = () => this.refreshAllStats();
+            refreshBtn.onclick = () => {
+                window.githubStatsHandler.refreshAllStats();
+            };
             
             statsSection.appendChild(refreshBtn);
         }
@@ -314,17 +316,21 @@ class GitHubStatsHandler {
 }
 
 // Initialize GitHub Stats Handler
-const githubStats = new GitHubStatsHandler();
+const githubStatsHandler = new GitHubStatsHandler();
+
+// Make it globally available for onclick handlers
+window.githubStatsHandler = githubStatsHandler;
+window.githubStats = githubStatsHandler; // Keep backward compatibility
 
 // Auto-initialize when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         console.log('DOM loaded, initializing GitHub stats...');
-        githubStats.init();
+        githubStatsHandler.init();
     });
 } else {
     console.log('DOM already loaded, initializing GitHub stats...');
-    githubStats.init();
+    githubStatsHandler.init();
 }
 
 export default GitHubStatsHandler;
