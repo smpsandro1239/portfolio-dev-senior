@@ -151,7 +151,6 @@ export class NavigationManager {
     updateActiveSection() {
         const scrollPosition = window.pageYOffset;
         const headerHeight = this.getHeaderHeight();
-        const viewportHeight = window.innerHeight;
         
         let activeSection = null;
         
