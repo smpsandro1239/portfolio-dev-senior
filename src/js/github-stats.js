@@ -5,6 +5,9 @@
 
 class GitHubStatsHandler {
     constructor() {
+        this.cachePrefix = 'github-stats-cache';
+        this.cacheTimeout = 86400000; // 24 horas
+        
         this.statsConfig = {
             'github-stats': {
                 primary: 'https://github-readme-stats.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true',
@@ -88,6 +91,15 @@ class GitHubStatsHandler {
         const config = this.statsConfig[statsType];
         console.log(`Setting up ${statsType} with primary URL:`, config.primary);
         
+        // Try to load from cache first
+        const cachedImage = this.getCachedImage(statsType);
+        if (cachedImage) {
+            console.log(`Using cached image for ${statsType}`);
+            img.src = cachedImage;
+            this.removeLoadingIndicator(img);
+            return;
+        }
+        
         // Clear any existing error handlers
         img.onerror = null;
         img.onload = null;
@@ -110,6 +122,9 @@ class GitHubStatsHandler {
             console.log(`${statsType} loaded successfully`);
             clearTimeout(loadingTimeout);
             this.removeLoadingIndicator(img);
+            
+            // Cache the successful image
+            this.cacheImage(statsType, img.src);
         };
         
         // Add error handler
@@ -312,6 +327,69 @@ class GitHubStatsHandler {
                 }
             }
         }, true);
+    }
+
+    /**
+     * Cache image URL for offline use
+     */
+    cacheImage(statsType, imageUrl) {
+        try {
+            const cacheKey = `${this.cachePrefix}-${statsType}`;
+            const cacheData = {
+                url: imageUrl,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+            console.log(`Cached ${statsType} image`);
+        } catch (error) {
+            console.warn(`Failed to cache ${statsType}:`, error);
+        }
+    }
+
+    /**
+     * Get cached image URL
+     */
+    getCachedImage(statsType) {
+        try {
+            const cacheKey = `${this.cachePrefix}-${statsType}`;
+            const cached = localStorage.getItem(cacheKey);
+            
+            if (!cached) return null;
+            
+            const cacheData = JSON.parse(cached);
+            const age = Date.now() - cacheData.timestamp;
+            
+            // Return cached image if less than 24 hours old
+            if (age < this.cacheTimeout) {
+                return cacheData.url;
+            }
+            
+            // Remove expired cache
+            localStorage.removeItem(cacheKey);
+            return null;
+            
+        } catch (error) {
+            console.warn(`Failed to get cached ${statsType}:`, error);
+            return null;
+        }
+    }
+
+    /**
+     * Clear all cached images
+     */
+    clearCache() {
+        try {
+            const keys = Object.keys(localStorage);
+            const cacheKeys = keys.filter(key => key.startsWith(this.cachePrefix));
+            
+            cacheKeys.forEach(key => {
+                localStorage.removeItem(key);
+            });
+            
+            console.log(`Cleared ${cacheKeys.length} cached images`);
+        } catch (error) {
+            console.warn('Failed to clear cache:', error);
+        }
     }
 }
 

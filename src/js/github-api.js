@@ -151,7 +151,7 @@ export class GitHubApiClient {
      */
     getDefaultDescription(repoName) {
         const descriptions = {
-            'IOT': 'Projetos e soluções IoT com ESP32, sensores e conectividade LoRa',
+            'IOT': 'Solução empresarial para controlo de barreiras físicas e monitorização de acesso veicular. Integra hardware ESP32 com backend Laravel, oferecendo controlo operacional preciso, segurança baseada em endereços MAC e atualizações em tempo real via LoRa',
             'empregabilidade-amar-terra-verde': 'Sistema web para gestão de empregabilidade e sustentabilidade ambiental',
             'IOTCNT': 'Contador inteligente IoT com interface web e monitorização remota',
             'TimeAdministrator': 'Aplicação TypeScript para gestão e administração de tempo',
