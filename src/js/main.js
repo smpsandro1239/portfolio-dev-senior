@@ -397,7 +397,7 @@ class PortfolioApp {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const bar = entry.target;
-                    const width = bar.style.width;
+                    const width = bar.dataset.progress + "%";
                     bar.style.width = '0';
                     setTimeout(() => {
                         bar.style.width = width;
