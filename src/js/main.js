@@ -47,19 +47,19 @@ class PortfolioApp {
      * Handle PWA Install Prompt
      */
     setupInstallPrompt() {
-        let deferredPrompt;
+        // let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             // Prevent Chrome 67 and earlier from automatically showing the prompt
             e.preventDefault();
             // Stash the event so it can be triggered later.
-            deferredPrompt = e;
+            // deferredPrompt = e;
             console.log('PWA: Install prompt captured');
 
             // Optionally: Show a custom install button in the UI
             // this.showInstallButton(deferredPrompt);
         });
 
-        window.addEventListener('appinstalled', (evt) => {
+        window.addEventListener('appinstalled', () => {
             console.log('PWA: App was installed successfully');
         });
     }
@@ -383,7 +383,7 @@ class PortfolioApp {
         btn.addEventListener('click', () => {
             // Placeholder: Show success message for now
             // In a real scenario, this could trigger a server-side route or a client-side library like jsPDF
-            alert('A preparar o seu download do CV... (Sandro Pereira)');
+            window.alert('A preparar o seu download do CV... (Sandro Pereira)');
             // window.open('/assets/cv-sandro-pereira.pdf', '_blank');
         });
     }
@@ -420,7 +420,7 @@ class PortfolioApp {
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const formData = new FormData(event.target);
+            const formData = new window.FormData(event.target);
             const data = Object.fromEntries(formData);
 
             // Client-side validation

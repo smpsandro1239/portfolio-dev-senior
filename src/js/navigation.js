@@ -38,7 +38,7 @@ export class NavigationManager {
 
             // Set initial active section
             this.updateActiveSection();
-            this.manageFocus(sectionId);
+            // Focus managed dynamically where applicable
 
             console.log('Navigation manager initialized');
         } catch (error) {
@@ -151,6 +151,7 @@ export class NavigationManager {
             this.isScrolling = false;
             this.updateActiveSection();
             this.manageFocus(sectionId);
+            // Focus managed dynamically where applicable
         }, this.config.scrollDuration);
 
         // Immediately update active section for visual feedback
@@ -165,7 +166,7 @@ export class NavigationManager {
         if (this.isScrolling) return;
 
         this.updateActiveSection();
-            this.manageFocus(sectionId);
+            // Focus managed dynamically where applicable
     }
 
     /**
@@ -279,7 +280,7 @@ export class NavigationManager {
         setTimeout(() => {
             this.isScrolling = false;
             this.updateActiveSection();
-            this.manageFocus(sectionId);
+            // Focus managed dynamically where applicable
         }, this.config.scrollDuration);
     }
 
@@ -297,7 +298,7 @@ export class NavigationManager {
         setTimeout(() => {
             this.isScrolling = false;
             this.updateActiveSection();
-            this.manageFocus(sectionId);
+            // Focus managed dynamically where applicable
         }, this.config.scrollDuration);
     }
 

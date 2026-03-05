@@ -94,7 +94,7 @@ export class GitHubApiClient {
         ];
 
         // First, try to get all repositories (including private ones if accessible)
-        let filteredRepos = repositories
+        const filteredRepos = repositories
             .filter(repo => {
                 // Only include non-fork, non-archived repos that are in our pinned list
                 return !repo.fork && !repo.archived && pinnedRepos.includes(repo.name);
