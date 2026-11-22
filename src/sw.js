@@ -1,7 +1,7 @@
 /* Autor: Sandro Pereira (smpsandro1239) */
-/* Projeto: portfolio-dev-senior – Portfólio vanilla sênior elite 2026 */
+/* Service Worker: cache local assets and provide an offline fallback. */
 
-const CACHE_NAME = 'sandro-portfolio-v2';
+const CACHE_NAME = 'sandro-portfolio-v3';
 const ASSETS_TO_CACHE = [
   '',
   'index.html',
@@ -16,59 +16,65 @@ const ASSETS_TO_CACHE = [
   'manifest.json'
 ];
 
-// Install Service Worker
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Service Worker: Caching assets...');
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(ASSETS_TO_CACHE))
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-// Activate Service Worker
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log('Service Worker: Clearing old cache...');
-            return caches.delete(cache);
-          }
-        })
-      );
-    })
+    caches.keys()
+      .then(cacheNames => Promise.all(
+        cacheNames
+          .filter(cacheName => cacheName !== CACHE_NAME)
+          .map(cacheName => caches.delete(cacheName))
+      ))
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Fetch Strategy: Stale-While-Revalidate
-self.addEventListener('fetch', (event) => {
-  // Ignore external API requests for GitHub (let them handle their own cache/rate limiting)
-  if (event.request.url.includes('api.github.com')) {
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const requestUrl = new URL(request.url);
+
+  /* Do not intercept writes or third-party requests such as GitHub stats. */
+  if (request.method !== 'GET' || requestUrl.origin !== self.location.origin) {
     return;
   }
 
   event.respondWith(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(event.request).then((response) => {
-        const fetchPromise = fetch(event.request).then((networkResponse) => {
-          // Only cache valid GET responses
-          if (event.request.method === 'GET' && networkResponse.status === 200) {
-            cache.put(event.request, networkResponse.clone());
-          }
-          return networkResponse;
-        }).catch(() => {
-          // Fallback if network fails and cache is empty
-          if (event.request.mode === 'navigate') {
-            return cache.match('index.html');
-          }
-        });
+    fetch(request)
+      .then(response => {
+        if (response.ok && response.type === 'basic') {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(request, responseToCache));
+        }
+        return response;
+      })
+      .catch(async () => {
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(request);
 
-        return response || fetchPromise;
-      });
-    })
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        if (request.mode === 'navigate') {
+          const offlinePage = await cache.match('index.html');
+          if (offlinePage) {
+            return offlinePage;
+          }
+        }
+
+        return new Response('Conteúdo indisponível sem ligação à Internet.', {
+          status: 503,
+          statusText: 'Service Unavailable',
+          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+        });
+      })
   );
 });
