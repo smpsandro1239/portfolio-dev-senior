@@ -1,7 +1,7 @@
 /* Autor: Sandro Pereira (smpsandro1239) */
 /* Service Worker: cache local assets and provide an offline fallback. */
 
-const CACHE_NAME = 'sandro-portfolio-v6';
+const CACHE_NAME = 'sandro-portfolio-v7';
 const ASSETS_TO_CACHE = [
   '',
   'index.html',
