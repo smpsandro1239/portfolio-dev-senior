@@ -202,7 +202,6 @@ class PortfolioApp {
 
             // Render projects (limit initial view)
             this.renderProjects(repositories.slice(0, this.config.maxProjects), projectsContainer);
-            this.setupProjectFilters();
 
         } catch (error) {
             console.error('Error loading projects:', error);
@@ -364,42 +363,6 @@ class PortfolioApp {
                 cursor.style.background = 'transparent';
             });
         });
-    }
-
-    setupProjectFilters() {
-        const filterContainer = document.getElementById('project-filters');
-        if (!filterContainer) return;
-
-        filterContainer.addEventListener('click', (e) => {
-            const btn = e.target.closest('.filter-btn');
-            if (!btn) return;
-
-            const filter = btn.dataset.filter;
-
-            // Update active state
-            filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            this.filterProjects(filter);
-        });
-    }
-
-    /**
-     * Filter projects by technology
-     */
-    filterProjects(tech) {
-        const projectsContainer = document.getElementById('projects-container');
-        if (!projectsContainer || !this.repositories) return;
-
-        const filtered = tech === 'all'
-            ? this.repositories
-            : this.repositories.filter(repo => {
-                const topics = (repo.topics || []).map(t => t.toLowerCase());
-                const lang = (repo.language || '').toLowerCase();
-                return topics.includes(tech.toLowerCase()) || lang === tech.toLowerCase();
-            });
-
-        this.renderProjects(filtered, projectsContainer);
     }
 
     setupAnimations() {
