@@ -54,7 +54,7 @@ async function build() {
     ]);
   }
 
-  for (const asset of ['manifest.json', 'sw.js']) {
+  for (const asset of ['manifest.json', 'sw.js', 'robots.txt', 'sitemap.xml']) {
     await cp(join(source, asset), join(output, asset));
   }
 
