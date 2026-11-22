@@ -29,8 +29,7 @@
   text-decoration: none;
 }
 
-.case-brand span,
-.case-hero h1 span {
+.case-brand span {
   color: var(--color-primary);
 }
 
@@ -40,17 +39,19 @@
   gap: 1.25rem;
 }
 
-.case-header nav a,
-.case-footer a {
+.case-footer a,
+.case-header nav a {
   color: var(--color-text-secondary);
   font-weight: 600;
   text-decoration: none;
 }
 
-.case-header nav a:hover,
-.case-footer a:hover {
+.case-footer a:hover,
+.case-header nav a:hover {
   color: var(--color-primary);
 }
+
+
 
 .case-hero {
   padding: clamp(4rem, 9vw, 8rem) 0;
@@ -96,6 +97,10 @@
   background: var(--color-bg-primary);
   font-size: 0.82rem;
   color: var(--color-text-secondary);
+}
+
+.case-hero h1 span {
+  color: var(--color-primary);
 }
 
 .case-overview {
