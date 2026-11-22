@@ -324,3 +324,26 @@
     scroll-behavior: auto;
   }
 }
+
+
+.case-visual {
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-bg-secondary);
+}
+
+.case-visual img {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.case-visual figcaption {
+  padding: 0.75rem 1rem;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+}
