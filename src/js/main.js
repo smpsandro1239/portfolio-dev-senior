@@ -28,7 +28,7 @@ class PortfolioApp {
         // Configuration
         this.config = {
             githubUsername: 'smpsandro1239',
-            maxProjects: 4,
+            maxProjects: 6,
             cacheTimeout: 300000, // 5 minutes
         };
 
