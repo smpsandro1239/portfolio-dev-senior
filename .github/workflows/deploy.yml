@@ -44,6 +44,9 @@ jobs:
         
     - name: Validate JavaScript (ESLint v9)
       run: npm run lint:js
+
+    - name: Run automated tests
+      run: npm test -- --runInBand
       
     # Backup: Direct ESLint execution (if npm script fails)
     - name: Validate JavaScript (Direct ESLint - Backup)
@@ -179,14 +182,11 @@ jobs:
           
           echo ""
           echo "### Validation Results"
-          echo "- ✅ HTML validation passed"
-          echo "- ✅ CSS validation passed"
-          echo "- ✅ JavaScript validation passed"
-          echo "- ✅ Performance budget met"
-          echo "- ✅ Accessibility test completed"
+          echo "- Checks configured: HTML, CSS, JavaScript, Jest, Lighthouse, axe-core and asset-size budgets."
+          echo "- Consult the individual step results above; this summary does not infer success."
           
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "- ✅ Deployed to GitHub Pages"
+            echo "- Deployment step is part of this run; check its result above."
           fi
           
           echo ""
