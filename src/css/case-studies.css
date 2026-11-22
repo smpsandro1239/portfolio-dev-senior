@@ -33,6 +33,28 @@
   color: var(--color-primary);
 }
 
+
+
+.case-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.case-footer a,
+.case-header nav a {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.case-footer a:hover,
+.case-header nav a:hover {
+  color: var(--color-primary);
+}
+
+/* The sticky index has intentionally scoped link states. */
+/* stylelint-disable no-descending-specificity */
 .case-index a {
   display: inline-flex;
   min-height: 38px;
@@ -58,24 +80,7 @@
   outline: 3px solid var(--color-primary);
   outline-offset: 3px;
 }
-
-.case-header nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-}
-
-.case-footer a,
-.case-header nav a {
-  color: var(--color-text-secondary);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.case-footer a:hover,
-.case-header nav a:hover {
-  color: var(--color-primary);
-}
+/* stylelint-enable no-descending-specificity */
 
 
 
