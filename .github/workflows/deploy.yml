@@ -114,6 +114,12 @@ jobs:
         echo "css_size=$css_size" >> $GITHUB_OUTPUT
         echo "js_total=$js_total" >> $GITHUB_OUTPUT
 
+    # Install a ChromeDriver version matched to the Chrome binary on the runner.
+    - name: Install matching ChromeDriver
+      run: |
+        npm install --global browser-driver-manager
+        npx browser-driver-manager install chrome
+
     # --- Teste de acessibilidade real com axe-core ---
     - name: Accessibility Test
       run: |
