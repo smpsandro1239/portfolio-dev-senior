@@ -105,6 +105,8 @@ describe('Technical project case studies', () => {
     expect(page).toContain('interface-principal.png');
     expect(page).toContain('alt="Captura do painel principal da aplicação de controlo de acessos IoT"');
     expect(page).toContain('loading="lazy"');
+    expect(page).toContain('Metricas%20de%20acesso.png');
+    expect(page).toContain('alt="Painel de métricas de acessos e atividade do sistema IoT"');
   });
 
   test('uses safe attributes for external links', () => {
