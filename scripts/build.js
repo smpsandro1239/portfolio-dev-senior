@@ -9,7 +9,7 @@ const output = join(root, 'docs');
 const npmExec = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
 function run(command, args) {
-  execFileSync(command, args, { cwd: root, stdio: 'inherit' });
+  execFileSync(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' });
 }
 
 async function exists(path) {
