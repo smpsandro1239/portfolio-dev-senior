@@ -74,6 +74,16 @@ describe('Technical project case studies', () => {
     expect(page).toContain('não se presume que todos os fornecedores externos estejam ativos');
   });
 
+  test('uses native lists and heading references for architecture diagrams', () => {
+    expect((page.match(/<ul class="architecture/g) || []).length).toBe(4);
+    expect(page).not.toMatch(/role="list(item)?"/);
+    expect(page).not.toMatch(/<div class="architecture/);
+    expect(page).toContain('aria-labelledby="architecture-smart-title"');
+    expect(page).toContain('aria-labelledby="architecture-crypto-title"');
+    expect(page).toContain('aria-labelledby="architecture-iot-title"');
+    expect(page).toContain('aria-labelledby="architecture-time-title"');
+  });
+
   test('includes the documented IoT dashboard screenshot with accessible text', () => {
     expect(page).toContain('interface-principal.png');
     expect(page).toContain('alt="Captura do painel principal da aplicação de controlo de acessos IoT"');
