@@ -4,6 +4,9 @@ import { describe, expect, test } from '@jest/globals';
 
 const pagePath = join(process.cwd(), 'src', 'projetos.html');
 const page = readFileSync(pagePath, 'utf8');
+const buildScript = readFileSync(join(process.cwd(), 'scripts', 'build.js'), 'utf8');
+const sitemap = readFileSync(join(process.cwd(), 'src', 'sitemap.xml'), 'utf8');
+const serviceWorker = readFileSync(join(process.cwd(), 'src', 'sw.js'), 'utf8');
 
 describe('Technical project case studies', () => {
   test('provides semantic page structure and a single primary heading', () => {
@@ -59,6 +62,26 @@ describe('Technical project case studies', () => {
     for (const link of externalLinks) {
       expect(link).toContain('rel="noopener noreferrer"');
     }
+  });
+
+  test('publishes the case studies, SEO files and stylesheets in the production build', () => {
+    expect(buildScript).toContain("join(source, 'projetos.html')");
+    expect(buildScript).toContain("'case-studies.css'");
+    expect(buildScript).toContain("'robots.txt'");
+    expect(buildScript).toContain("'sitemap.xml'");
+    expect(sitemap).toContain('/projetos.html');
+  });
+
+  test('precaches the case study page and stylesheet without invalid async syntax', () => {
+    expect(serviceWorker).toContain("'projetos.html'");
+    expect(serviceWorker).toContain("'css/case-studies.css'");
+    expect(serviceWorker).toContain(".then(async response =>");
+  });
+
+  test('exposes descriptive search and social metadata', () => {
+    expect(page).toContain('property="og:title"');
+    expect(page).toContain('name="twitter:card"');
+    expect(page).toContain('"@type": "CollectionPage"');
   });
 
   test('loads the shared and case-study stylesheets', () => {
