@@ -71,6 +71,10 @@ jobs:
           cp -r src/img docs/
         fi
         
+        # Recursos PWA necessários na raiz publicada.
+        cp src/manifest.json docs/manifest.json
+        cp src/sw.js docs/sw.js
+
         touch docs/.nojekyll
 
     # --- Lighthouse CI (após build) ---
