@@ -366,40 +366,6 @@ class PortfolioApp {
         });
     }
 
-    setupCVDownload() {
-        const btn = document.getElementById('download-cv');
-        if (!btn) return;
-
-        btn.addEventListener('click', () => {
-            // Placeholder: Show success message for now
-            // In a real scenario, this could trigger a server-side route or a client-side library like jsPDF
-            window.alert('A preparar o seu download do CV... (Sandro Pereira)');
-            // window.open('/assets/cv-sandro-pereira.pdf', '_blank');
-        });
-    }
-
-    /**
-     * Animate skill bars on scroll
-     */
-    animateSkills() {
-        const progressBars = document.querySelectorAll('.skill-progress');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const width = bar.dataset.progress + "%";
-                    bar.style.width = '0';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
-                    observer.unobserve(bar);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        progressBars.forEach(bar => observer.observe(bar));
-    }
-
     setupProjectFilters() {
         const filterContainer = document.getElementById('project-filters');
         if (!filterContainer) return;
