@@ -25,7 +25,7 @@
     "accessibility",
     "performance"
   ],
-  "author": "Sandro Pereira <sandro@exemplo.com>",
+  "author": "Sandro Pereira",
   "license": "MIT",
   "devDependencies": {
     "@axe-core/cli": "^4.8.3",
