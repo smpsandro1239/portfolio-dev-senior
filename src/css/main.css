@@ -1878,7 +1878,8 @@ html {
 
 .hero__button--primary {
   color: #fff;
-  background: var(--gradient-primary);
+  background: #1d4ed8;
+  background-image: none;
   border-color: transparent;
 }
 
@@ -1963,7 +1964,7 @@ html {
 }
 
 .project-feature > a {
-  color: var(--color-primary);
+  color: #1d4ed8;
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
 }
