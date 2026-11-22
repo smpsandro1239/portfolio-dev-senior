@@ -27,7 +27,16 @@ async function build() {
   await mkdir(join(output, 'js'), { recursive: true });
 
   await cp(join(source, 'index.html'), join(output, 'index.html'));
-  run(npmExec, ['csso-cli', join(source, 'css', 'main.css'), '-o', join(output, 'css', 'main.css')]);
+  await cp(join(source, 'projetos.html'), join(output, 'projetos.html'));
+
+  for (const stylesheet of ['main.css', 'case-studies.css']) {
+    run(npmExec, [
+      'csso-cli',
+      join(source, 'css', stylesheet),
+      '-o',
+      join(output, 'css', stylesheet)
+    ]);
+  }
 
   const jsDirectory = join(source, 'js');
   const { readdir } = await import('node:fs/promises');
