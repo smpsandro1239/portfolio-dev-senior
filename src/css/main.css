@@ -627,12 +627,6 @@ a:focus {
   text-align: center;
 }
 
-.course__skills .skills-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-}
-
 .skill-category {
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
@@ -1728,6 +1722,12 @@ a:focus {
     .skills-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.course__skills .skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
 }
 
 .skills-category h3 {
