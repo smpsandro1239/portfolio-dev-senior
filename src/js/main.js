@@ -119,7 +119,6 @@ class PortfolioApp {
             this.setupHeaderScrollEffect();
 
             // Initialise independent UI features even if GitHub API is unavailable.
-            this.setupContactForm();
             this.setupCustomCursor();
 
             console.log('Portfolio app initialized successfully');
@@ -344,22 +343,6 @@ class PortfolioApp {
     }
 
     /**
-     * Set up animations
-     */
-
-    /**
-     * Set up project filtering
-     */
-
-    /**
-     * Set up contact form
-     */
-
-    /**
-     * Handle CV Download logic
-     */
-
-    /**
      * Set up custom cursor micro-interaction
      */
     setupCustomCursor() {
@@ -415,64 +398,6 @@ class PortfolioApp {
         }, { threshold: 0.5 });
 
         progressBars.forEach(bar => observer.observe(bar));
-    }
-
-    setupContactForm() {
-        const form = document.getElementById('contact-form');
-        const status = document.getElementById('form-status');
-        const btn = document.getElementById('submit-btn');
-
-        if (!form) return;
-
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const formData = new window.FormData(event.target);
-            const data = Object.fromEntries(formData);
-
-            // Client-side validation
-            if (!data.name || !data.email || !data.message) {
-                status.textContent = 'Por favor preencha todos os campos.';
-                status.className = 'form-status error';
-                return;
-            }
-
-            try {
-                btn.disabled = true;
-                btn.textContent = 'A enviar...';
-                status.textContent = '';
-
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: JSON.stringify(data),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    status.textContent = 'Mensagem enviada com sucesso! Obrigado.';
-                    status.className = 'form-status success';
-                    form.reset();
-                } else {
-                    const errorData = await response.json();
-                    if (Object.hasOwnProperty.call(errorData, 'errors')) {
-                        status.textContent = errorData["errors"].map(error => error["message"]).join(", ");
-                    } else {
-                        status.textContent = 'Ocorreu um erro ao enviar a mensagem.';
-                    }
-                    status.className = 'form-status error';
-                }
-            } catch (error) {
-                status.textContent = 'Erro de ligação. Tente novamente mais tarde.';
-                status.className = 'form-status error';
-                console.error('Contact form error:', error);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Enviar Mensagem';
-            }
-        });
     }
 
     setupProjectFilters() {
