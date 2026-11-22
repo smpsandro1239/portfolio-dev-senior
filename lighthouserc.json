@@ -1,7 +1,7 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:8080"],
+      "url": ["http://localhost:8080", "http://localhost:8080/projetos.html"],
       "settings": {
         "preset": "desktop",
         "throttlingMethod": "provided",
