@@ -228,7 +228,7 @@
   line-height: 1.75;
 }
 
-.case-columns li+li {
+.case-columns li + li {
   margin-top: 0.35rem;
 }
 
@@ -295,32 +295,32 @@
   font-size: 0.85rem;
 }
 
-@media(max-width:760px) {
-.case-overview,
-.case-columns {
+@media (max-width: 760px) {
+  .case-overview,
+  .case-columns {
     grid-template-columns: 1fr;
   }
 
-.case-next__inner {
+  .case-next__inner {
     align-items: flex-start;
     flex-direction: column;
   }
 
-.case-header__inner {
+  .case-header__inner {
     min-height: 64px;
   }
 
-.case-header nav {
+  .case-header nav {
     gap: 0.75rem;
   }
 
-.case-header nav a {
+  .case-header nav a {
     font-size: 0.82rem;
   }
 }
 
-@media(prefers-reduced-motion:reduce) {
-.case-card {
+@media (prefers-reduced-motion: reduce) {
+  .case-card {
     scroll-behavior: auto;
   }
 }
