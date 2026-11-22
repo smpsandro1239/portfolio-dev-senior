@@ -38,7 +38,7 @@
     "lighthouse": "^12.2.1",
     "serve": "^14.2.1",
     "stylelint": "^16.1.0",
-    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard": "^41.0.0",
     "terser": "^5.26.0"
   },
   "repository": {
