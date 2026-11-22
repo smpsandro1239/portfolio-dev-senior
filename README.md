@@ -36,7 +36,7 @@ TeSP em **Desenvolvimento Web e Multimédia** — percurso de ensino superior t�
 
 ## Estudos de caso técnicos
 
-A página [Projetos e Estudos de Caso](https://smpsandro1239.github.io/portfolio-dev-senior/projetos.html) aprofunda cinco repositórios, apresenta fluxos arquiteturais conceptuais e distingue funcionalidades documentadas de capacidades ainda não validadas. Não apresenta como certificadas funcionalidades fiscais nem como comprovados resultados de hardware, trading ou integrações externas.
+A página [Projetos e Estudos de Caso](https://smpsandro1239.github.io/portfolio-dev-senior/projetos.html) apresenta seis estudos: cinco repositórios públicos e o SMART SHELF AI, identificado explicitamente como projeto em desenvolvimento e sem código público. Inclui fluxos arquiteturais conceptuais e distingue funcionalidades documentadas de capacidades ainda não validadas. Não apresenta como certificadas funcionalidades fiscais nem como comprovados resultados de hardware, trading ou integrações externas.
 
 ## Tecnologias do portefólio
 
@@ -82,6 +82,13 @@ O workflow em `.github/workflows/deploy.yml` está configurado para:
 6. Publicar no GitHub Pages quando a execução ocorre na branch `main`.
 
 A existência destas verificações no workflow não significa, por si só, que a última execução passou. Consultar sempre o separador **Actions** para o resultado mais recente. As pontuações Lighthouse e a conformidade WCAG só devem ser divulgadas quando acompanhadas por relatórios atuais e verificáveis.
+
+## Manutenção e segurança
+
+- Dependabot verifica semanalmente atualizações de dependências npm e GitHub Actions.
+- A política de divulgação responsável está documentada em [SECURITY.md](SECURITY.md).
+- O workflow cancela execuções antigas da mesma referência para evitar builds redundantes.
+- As vulnerabilidades reportadas pelo npm devem ser analisadas e corrigidas de forma controlada; não se considera a configuração do Dependabot uma correção automática.
 
 ## Nota sobre o conteúdo
 
