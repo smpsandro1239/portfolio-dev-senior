@@ -87,14 +87,6 @@ jobs:
         uploadArtifacts: false
         temporaryPublicStorage: false
         
-    - name: Stop local server
-      if: always()
-      run: |
-        if [ -f server.pid ]; then
-          kill $(cat server.pid) || true
-          rm server.pid
-        fi
-
     # --- Verificação de budget de performance ---
     - name: Performance Budget Check
       id: perf-check
@@ -133,16 +125,26 @@ jobs:
         # Server is already running from Lighthouse step
         npx @axe-core/cli http://localhost:8080
 
+    - name: Stop local server
+      if: always()
+      run: |
+        if [ -f server.pid ]; then
+          kill $(cat server.pid) || true
+          rm server.pid
+        fi
+
     # --- Verificação da pasta docs antes do deploy ---
     - name: Verify docs directory
       run: |
         echo "Verificando conteúdo da pasta docs..."
         ls -la docs/
-        if [ ! -f docs/index.html ]; then
-          echo "❌ index.html em falta na pasta docs/ — build pode ter falhou"
-          exit 1
-        fi
-        echo "✅ docs/index.html encontrado"
+        for required_file in docs/index.html docs/manifest.json docs/sw.js docs/css/main.css docs/js/main.js; do
+          if [ ! -f "$required_file" ]; then
+            echo "❌ Ficheiro obrigatório em falta: $required_file"
+            exit 1
+          fi
+          echo "✅ $required_file"
+        done
 
     # --- Deploy para GitHub Pages (só na main) ---
     - name: Deploy to GitHub Pages
