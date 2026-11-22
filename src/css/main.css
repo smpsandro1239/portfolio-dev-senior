@@ -1678,6 +1678,7 @@ a:focus {
     break-inside: avoid;
   }
 }
+
 /* Language Switcher */
 .lang-switcher {
     display: flex;
@@ -1771,6 +1772,7 @@ a:focus {
 }
 
 /* Visual Polish & Micro-interactions */
+
 /* Custom Cursor (Optional but high-end) */
 @media (pointer: fine) {
     .custom-cursor {
