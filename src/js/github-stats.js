@@ -10,8 +10,8 @@ class GitHubStatsHandler {
         
         this.statsConfig = {
             'github-stats': {
-                primary: 'https://github-readme-stats.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true',
-                fallback: 'https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&count_private=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true'
+                primary: 'https://github-readme-stats.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true',
+                fallback: 'https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=smpsandro1239&show_icons=true&theme=radical&hide_border=true&title_color=667eea&icon_color=667eea&text_color=ffffff&bg_color=0a0a0a&include_all_commits=true'
             },
             'top-langs': {
                 primary: 'https://github-readme-stats.vercel.app/api/top-langs/?username=smpsandro1239&layout=compact&theme=radical&hide_border=true&title_color=667eea&text_color=ffffff&bg_color=0a0a0a',
