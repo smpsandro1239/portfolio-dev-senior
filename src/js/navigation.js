@@ -105,9 +105,6 @@ export class NavigationManager {
         }
     }
 
-    /**
-     * Smooth scroll to a section
-     */
 
     /**
      * Manage focus after navigation
@@ -128,6 +125,7 @@ export class NavigationManager {
         }
     }
 
+    /** Determine scroll behavior from the user's motion preference. */
     getScrollBehavior() {
         if (typeof window.matchMedia !== 'function') {
             return 'smooth';
@@ -138,12 +136,14 @@ export class NavigationManager {
             : 'smooth';
     }
 
+    /** Avoid delayed focus when smooth scrolling is disabled. */
     getScrollDuration() {
         return this.getScrollBehavior() === 'auto'
             ? 0
             : this.config.scrollDuration;
     }
 
+    /** Scroll to a section and move focus after the scroll completes. */
     scrollToSection(element, sectionId) {
         const headerHeight = this.getHeaderHeight();
         const targetPosition = element.offsetTop - headerHeight - this.config.scrollOffset;
