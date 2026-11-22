@@ -1,7 +1,7 @@
 /* Autor: Sandro Pereira (smpsandro1239) */
 /* Projeto: portfolio-dev-senior – Portfólio vanilla sênior elite 2026 */
 
-const CACHE_NAME = 'sandro-portfolio-v1';
+const CACHE_NAME = 'sandro-portfolio-v2';
 const ASSETS_TO_CACHE = [
   '',
   'index.html',
