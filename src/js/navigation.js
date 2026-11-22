@@ -128,6 +128,22 @@ export class NavigationManager {
         }
     }
 
+    getScrollBehavior() {
+        if (typeof window.matchMedia !== 'function') {
+            return 'smooth';
+        }
+
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? 'auto'
+            : 'smooth';
+    }
+
+    getScrollDuration() {
+        return this.getScrollBehavior() === 'auto'
+            ? 0
+            : this.config.scrollDuration;
+    }
+
     scrollToSection(element, sectionId) {
         const headerHeight = this.getHeaderHeight();
         const targetPosition = element.offsetTop - headerHeight - this.config.scrollOffset;
@@ -143,7 +159,7 @@ export class NavigationManager {
         // Perform smooth scroll
         window.scrollTo({
             top: Math.max(0, targetPosition),
-            behavior: 'smooth'
+            behavior: this.getScrollBehavior()
         });
 
         // Reset scrolling flag after animation
@@ -152,7 +168,7 @@ export class NavigationManager {
             this.updateActiveSection();
             this.manageFocus(sectionId);
             // Focus managed dynamically where applicable
-        }, this.config.scrollDuration);
+        }, this.getScrollDuration());
 
         // Immediately update active section for visual feedback
         this.setActiveSection(sectionId);
@@ -274,14 +290,14 @@ export class NavigationManager {
 
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: this.getScrollBehavior()
         });
 
         setTimeout(() => {
             this.isScrolling = false;
             this.updateActiveSection();
             // Focus managed dynamically where applicable
-        }, this.config.scrollDuration);
+        }, this.getScrollDuration());
     }
 
     /**
@@ -292,14 +308,14 @@ export class NavigationManager {
 
         window.scrollTo({
             top: document.documentElement.scrollHeight,
-            behavior: 'smooth'
+            behavior: this.getScrollBehavior()
         });
 
         setTimeout(() => {
             this.isScrolling = false;
             this.updateActiveSection();
             // Focus managed dynamically where applicable
-        }, this.config.scrollDuration);
+        }, this.getScrollDuration());
     }
 
     /**
