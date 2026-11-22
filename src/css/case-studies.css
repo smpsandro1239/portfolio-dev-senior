@@ -1,4 +1,5 @@
-/* Technical case studies page */ .case-shell {
+/* Technical case studies page */
+.case-shell {
   width: min(1120px, calc(100% - 2.5rem));
   margin-inline: auto;
 }
@@ -29,7 +30,7 @@
 }
 
 .case-brand span,
-.case-hero h1 span  {
+.case-hero h1 span {
   color: var(--color-primary);
 }
 
@@ -40,14 +41,14 @@
 }
 
 .case-header nav a,
-.case-footer a  {
+.case-footer a {
   color: var(--color-text-secondary);
   font-weight: 600;
   text-decoration: none;
 }
 
 .case-header nav a:hover,
-.case-footer a:hover  {
+.case-footer a:hover {
   color: var(--color-primary);
 }
 
@@ -80,7 +81,7 @@
 }
 
 .case-hero__meta,
-.case-tags  {
+.case-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem;
@@ -88,7 +89,7 @@
 }
 
 .case-hero__meta span,
-.case-tags span  {
+.case-tags span {
   padding: 0.45rem 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: 999px;
@@ -296,7 +297,7 @@
 
 @media(max-width:760px) {
 .case-overview,
-.case-columns  {
+.case-columns {
     grid-template-columns: 1fr;
   }
 
