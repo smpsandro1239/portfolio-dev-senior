@@ -55,6 +55,12 @@ describe('Technical project case studies', () => {
     expect(page).toContain('não se presume que todos os fornecedores externos estejam ativos');
   });
 
+  test('includes the documented IoT dashboard screenshot with accessible text', () => {
+    expect(page).toContain('interface-principal.png');
+    expect(page).toContain('alt="Captura do painel principal da aplicação de controlo de acessos IoT"');
+    expect(page).toContain('loading="lazy"');
+  });
+
   test('uses safe attributes for external links', () => {
     const externalLinks = page.match(/<a\b[^>]*target="_blank"[^>]*>/g) || [];
 
