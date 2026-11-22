@@ -4,6 +4,7 @@ import { describe, expect, test } from '@jest/globals';
 
 const pagePath = join(process.cwd(), 'src', 'projetos.html');
 const page = readFileSync(pagePath, 'utf8');
+const homepage = readFileSync(join(process.cwd(), 'src', 'index.html'), 'utf8');
 const buildScript = readFileSync(join(process.cwd(), 'scripts', 'build.js'), 'utf8');
 const sitemap = readFileSync(join(process.cwd(), 'src', 'sitemap.xml'), 'utf8');
 const serviceWorker = readFileSync(join(process.cwd(), 'src', 'sw.js'), 'utf8');
@@ -32,6 +33,13 @@ describe('Technical project case studies', () => {
     for (const id of expectedIds) {
       expect(page).toContain(`id="${id}"`);
     }
+  });
+
+  test('features SMART SHELF AI on the homepage with a link to its case study', () => {
+    expect(homepage).toContain('class="project-feature"');
+    expect(homepage).toContain('SMART SHELF AI');
+    expect(homepage).toContain('href="projetos.html#smart-shelf-ai"');
+    expect(homepage).toContain('EM DESENVOLVIMENTO');
   });
 
   test('labels SMART SHELF AI as in development and does not imply public source code', () => {
