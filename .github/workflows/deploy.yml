@@ -55,30 +55,7 @@ jobs:
 
     # --- Build dos assets de produção ---
     - name: Build production assets
-      run: |
-        mkdir -p docs
-        cp src/index.html docs/
-        
-        mkdir -p docs/css
-        npx csso-cli src/css/main.css -o docs/css/main.css
-        
-        mkdir -p docs/js
-        for js_file in src/js/*.js; do
-          if [ -f "$js_file" ]; then
-            filename=$(basename "$js_file")
-            npx terser "$js_file" --compress --mangle --output "docs/js/$filename"
-          fi
-        done
-        
-        if [ -d "src/img" ]; then
-          cp -r src/img docs/
-        fi
-        
-        # Recursos PWA necessários na raiz publicada.
-        cp src/manifest.json docs/manifest.json
-        cp src/sw.js docs/sw.js
-
-        touch docs/.nojekyll
+      run: npm run build
 
     # --- Lighthouse CI (após build) ---
     - name: Start local server for Lighthouse
