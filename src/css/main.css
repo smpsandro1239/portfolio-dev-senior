@@ -1716,12 +1716,6 @@ a:focus {
     background: var(--bg-hover, #e5e7eb);
 }
 
-.project-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
 /* Skills & Timeline */
 .skills-grid {
     display: grid;
@@ -1777,11 +1771,6 @@ a:focus {
 }
 
 /* Visual Polish & Micro-interactions */
-.project-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
 /* Custom Cursor (Optional but high-end) */
 @media (pointer: fine) {
     .custom-cursor {
@@ -1797,12 +1786,6 @@ a:focus {
     }
 }
 
-/* Smooth Scrolling refinement */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-}
-
 
 /* Portfolio refinements: honest quality states, focused contact layout and keyboard focus. */
 .metric-status--configured {
@@ -1816,12 +1799,6 @@ html {
   grid-template-columns: minmax(0, 1fr);
   max-width: 780px;
   margin-inline: auto;
-}
-
-.contact__links {
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 :where(a, button, input, textarea):focus-visible {
