@@ -19,7 +19,7 @@ describe('Technical project case studies', () => {
     expect((page.match(/<h1\b/g) || []).length).toBe(1);
   });
 
-  test('documents the five selected public repositories', () => {
+  test('documents all six case studies, including five public repositories', () => {
     const expectedIds = [
       'smart-shelf-ai',\n      'ai-crypto',
       'iot',
@@ -108,6 +108,14 @@ describe('Technical project case studies', () => {
     expect(mainScript).not.toContain('setupProjectFilters');
     expect(mainStyles).not.toContain('.contact-form');
     expect(mainStyles).not.toContain('.filter-btn');
+  });
+
+  test('contains valid JSON-LD structured data', () => {
+    const match = page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    expect(match).not.toBeNull();
+    const structuredData = JSON.parse(match[1]);
+    expect(structuredData['@type']).toBe('CollectionPage');
+    expect(structuredData.hasPart.some(item => item.name === 'SMART SHELF AI')).toBe(true);
   });
 
   test('exposes descriptive search and social metadata', () => {
