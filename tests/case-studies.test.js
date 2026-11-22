@@ -7,6 +7,8 @@ const page = readFileSync(pagePath, 'utf8');
 const buildScript = readFileSync(join(process.cwd(), 'scripts', 'build.js'), 'utf8');
 const sitemap = readFileSync(join(process.cwd(), 'src', 'sitemap.xml'), 'utf8');
 const serviceWorker = readFileSync(join(process.cwd(), 'src', 'sw.js'), 'utf8');
+const mainScript = readFileSync(join(process.cwd(), 'src', 'js', 'main.js'), 'utf8');
+const mainStyles = readFileSync(join(process.cwd(), 'src', 'css', 'main.css'), 'utf8');
 
 describe('Technical project case studies', () => {
   test('provides semantic page structure and a single primary heading', () => {
@@ -83,6 +85,14 @@ describe('Technical project case studies', () => {
     expect(serviceWorker).toContain("'projetos.html'");
     expect(serviceWorker).toContain("'css/case-studies.css'");
     expect(serviceWorker).toContain(".then(async response =>");
+  });
+
+  test('does not retain handlers for removed placeholder UI', () => {
+    expect(mainScript).not.toContain('setupContactForm');
+    expect(mainScript).not.toContain('setupCVDownload');
+    expect(mainScript).not.toContain('setupProjectFilters');
+    expect(mainStyles).not.toContain('.contact-form');
+    expect(mainStyles).not.toContain('.filter-btn');
   });
 
   test('exposes descriptive search and social metadata', () => {
