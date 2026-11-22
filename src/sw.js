@@ -50,7 +50,7 @@ self.addEventListener('fetch', event => {
       .then(response => {
         if (response.ok && response.type === 'basic') {
           const responseToCache = response.clone();
-          caches.open(CACHE_NAME)
+          await caches.open(CACHE_NAME)
             .then(cache => cache.put(request, responseToCache));
         }
         return response;
