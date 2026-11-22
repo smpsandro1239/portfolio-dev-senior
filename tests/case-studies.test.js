@@ -21,7 +21,8 @@ describe('Technical project case studies', () => {
 
   test('documents all six case studies, including five public repositories', () => {
     const expectedIds = [
-      'smart-shelf-ai',\n      'ai-crypto',
+      'smart-shelf-ai',
+      'ai-crypto',
       'iot',
       'time-administrator',
       'multifreq',
