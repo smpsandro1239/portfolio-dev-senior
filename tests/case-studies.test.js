@@ -74,6 +74,23 @@ describe('Technical project case studies', () => {
     expect(page).toContain('não se presume que todos os fornecedores externos estejam ativos');
   });
 
+  test('provides direct navigation to every project case study', () => {
+    const projectIds = [
+      'smart-shelf-ai',
+      'ai-crypto',
+      'iot',
+      'time-administrator',
+      'multifreq',
+      'faturacao'
+    ];
+
+    expect(page).toContain('aria-label="Navegação dos estudos de caso"');
+    for (const id of projectIds) {
+      expect(page).toContain(`href="#${id}"`);
+      expect(page).toContain(`id="${id}"`);
+    }
+  });
+
   test('uses native lists and heading references for architecture diagrams', () => {
     expect((page.match(/<ul class="architecture/g) || []).length).toBe(4);
     expect(page).not.toMatch(/role="list(item)?"/);
