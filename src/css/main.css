@@ -1997,3 +1997,64 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Hero calls to action */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: var(--space-8) auto;
+}
+
+.hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.hero__button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.hero__button--primary {
+  color: #fff;
+  background: var(--gradient-primary);
+  border-color: transparent;
+}
+
+.hero__button--primary:hover {
+  color: #fff;
+}
+
+.hero__button--secondary {
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+}
+
+.hero__button--secondary:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 480px) {
+  .hero__actions {
+    align-items: stretch;
+    flex-direction: column;
+    max-width: 320px;
+  }
+
+  .hero__button {
+    width: 100%;
+  }
+}
