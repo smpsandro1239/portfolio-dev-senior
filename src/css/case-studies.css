@@ -347,3 +347,9 @@
   color: var(--color-text-secondary);
   font-size: 0.8rem;
 }
+
+
+.case-next .hero__button--primary {
+  background: #1d4ed8;
+  background-image: none;
+}
