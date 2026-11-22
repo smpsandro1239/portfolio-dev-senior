@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sandro Pereira — projetos de desenvolvimento de software, aplicações web, inteligência artificial e sistemas IoT.">
     <meta name="author" content="Sandro Pereira">
-    <meta name="keywords" content="JavaScript, HTML, CSS, Desenvolvedor Web, Formador TI, Portfolio Técnico">
+    <meta name="keywords" content="JavaScript, HTML, CSS, desenvolvimento web, portefólio técnico">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -73,7 +73,7 @@
 
 </head>
 <body>
-    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
     <!-- Skip to content link for accessibility -->
     <a href="#main-content" class="skip-link">Saltar para o conteúdo principal</a>
 
@@ -136,15 +136,15 @@
                     </blockquote>
 
                     <div class="hero__specializations">
-                        <h3>Áreas de Especialização</h3>
+                        <h3>Áreas de prática e interesse</h3>
                         <div class="specializations-grid">
                             <div class="specialization">
-                                <h4>Arquitetura de Software</h4>
-                                <p>Design de sistemas modulares, escaláveis e resilientes, com base em princípios como <em>Clean Architecture</em> e padrões de projeto modernos.</p>
+                                <h4>Engenharia de Software</h4>
+                                <p>Interesse e prática no desenho de soluções modulares, manutenção de código, separação de responsabilidades e utilização de padrões de projeto.</p>
                             </div>
                             <div class="specialization">
-                                <h4>Observabilidade &amp; Métricas</h4>
-                                <p>Implementação de monitorização contínua, análise de desempenho e indicadores técnicos que suportam decisões orientadas a valor.</p>
+                                <h4>Qualidade e observabilidade</h4>
+                                <p>Atenção a testes, análise de desempenho, registo de eventos e indicadores que ajudam a compreender o comportamento das aplicações.</p>
                             </div>
                             <div class="specialization">
                                 <h4>Aprendizagem e partilha técnica</h4>
@@ -222,7 +222,7 @@
                         <div class="metric-card">
                             <div class="metric-icon">✅</div>
                             <h3 class="metric-title">Validação HTML</h3>
-                            <div class="metric-status metric-status--pass">Verificação configurada</div>
+                            <div class="metric-status metric-status--configured">Configurado · por validar</div>
                             <p class="metric-description">Validação automática configurada no workflow; o estado atual deve ser confirmado nas execuções</p>
                         </div>
 
@@ -243,30 +243,28 @@
                         <div class="metric-card">
                             <div class="metric-icon">📱</div>
                             <h3 class="metric-title">Design Responsivo</h3>
-                            <div class="metric-status metric-status--pass">Testes automatizados configurados</div>
+                            <div class="metric-status metric-status--configured">Layout responsivo · por testar</div>
                             <p class="metric-description">Layout responsivo; a compatibilidade deve ser confirmada em dispositivos e viewports reais</p>
                         </div>
 
                         <div class="metric-card">
                             <div class="metric-icon">♿</div>
                             <h3 class="metric-title">Acessibilidade</h3>
-                            <div class="metric-status metric-status--pass">Objetivo: WCAG 2.1 AA</div>
-                            <p class="metric-description">Inclui estrutura semântica e verificação automatizada com axe-core; requer validação manual complementar</p>
+                            <div class="metric-status metric-status--configured">axe-core configurado</div>
+                            <p class="metric-description">A verificação automatizada está prevista no workflow; a conformidade exige também testes manuais e validação com tecnologias de apoio</p>
                         </div>
 
                         <div class="metric-card">
                             <div class="metric-icon">🚀</div>
                             <h3 class="metric-title">Performance</h3>
-                            <div class="metric-status metric-status--pass">Dentro dos Limites</div>
-                            <p class="metric-description">O workflow verifica limites de tamanho para CSS e JavaScript</p>
+                            <div class="metric-status metric-status--configured">Orçamento definido</div>
+                            <p class="metric-description">O workflow define limites de tamanho para CSS e JavaScript; não equivale a uma medição Lighthouse atual</p>
                         </div>
                     </div>
 
                     <div class="quality-footer">
                         <p class="quality-note">
-                            <strong>Compromisso com a Excelência:</strong> Cada linha de código foi escrita
-                            com precisão, testada rigorosamente e validada segundo os padrões mais exigentes
-                            da indústria de desenvolvimento web.
+                            <strong>Compromisso com a Excelência:</strong> A qualidade é tratada como um processo contínuo: validação automatizada, revisão técnica e melhoria incremental.
                         </p>
                     </div>
                 </div>
@@ -280,7 +278,7 @@
                     <!-- GitHub Stats Cards -->
                     <div class="stats-grid">
                         <div class="stat-card fade-in">
-                            <img src="https://github-readme-stats.vercel.app/api?username=smpsandro1239&amp;show_icons=true&amp;theme=radical&amp;hide_border=true&amp;count_private=true&amp;title_color=667eea&amp;icon_color=667eea&amp;text_color=ffffff&amp;bg_color=0a0a0a&amp;include_all_commits=true"
+                            <img src="https://github-readme-stats.vercel.app/api?username=smpsandro1239&amp;show_icons=true&amp;theme=radical&amp;hide_border=true&amp;title_color=667eea&amp;icon_color=667eea&amp;text_color=ffffff&amp;bg_color=0a0a0a&amp;include_all_commits=true"
                                  alt="Estatísticas GitHub"
                                  loading="lazy"
                                  onerror="this.src='https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api?username=smpsandro1239&amp;show_icons=true&amp;theme=radical&amp;hide_border=true&amp;count_private=true&amp;title_color=667eea&amp;icon_color=667eea&amp;text_color=ffffff&amp;bg_color=0a0a0a&amp;include_all_commits=true'">
@@ -322,48 +320,19 @@
 
         <section id="curso" class="section section--alt">
             <div class="container">
-                <h2 class="section__title">Formação &amp; Curso</h2>
+                <h2 class="section__title">Aprendizagem contínua</h2>
                 <div class="course">
-                    <h3 class="course__title">Curso de JavaScript 2026 - PT-PT</h3>
+                    <h3 class="course__title">JavaScript — percurso de aprendizagem</h3>
                     <p class="course__description">
-                        Um curso completo, moderno e inteiramente em <strong>português europeu</strong>,
-                        concebido para quem quer dominar JavaScript com profundidade.
-                        Estruturado em módulos progressivos, combina teoria acessível, analogias claras,
-                        prática guiada, quizzes e desafios reais — tudo pensado para formar programadores
-                        <strong>competentes, críticos e preparados para o mundo profissional</strong>.
+                        Repositório dedicado à aprendizagem e experimentação com JavaScript.
+                        O código e o histórico de alterações permitem acompanhar os exercícios,
+                        as experiências e a evolução do trabalho.
                     </p>
-                    <blockquote class="course__philosophy">
-                        «Ensinar não é apenas transmitir conhecimento — é inspirar a busca contínua
-                        pela excelência técnica e pelo crescimento pessoal.»
-                    </blockquote>
-
-                    <div class="course__skills">
-                        <h4>Competências Técnicas</h4>
-                        <div class="skills-grid">
-                            <div class="skill-category">
-                                <h5>Core &amp; Arquitetura</h5>
-                                <p>JavaScript (ES6+), TypeScript, HTML5, CSS3, Padrões de Projeto, Clean Architecture</p>
-                            </div>
-                            <div class="skill-category">
-                                <h5>Frameworks &amp; Bibliotecas</h5>
-                                <p>React.js, Next.js, Vue.js, Node.js, NestJS</p>
-                            </div>
-                            <div class="skill-category">
-                                <h5>Ferramentas &amp; DevOps</h5>
-                                <p>Git, GitHub Actions, Docker, Webpack, Jest, CI/CD pipelines</p>
-                            </div>
-                            <div class="skill-category">
-                                <h5>Base de Dados &amp; Armazenamento</h5>
-                                <p>PostgreSQL, MongoDB, Redis, Firebase</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="https://github.com/smpsandro1239/curso-js-2026-pt"
+                    <a href="https://github.com/smpsandro1239/Curso_JavaScript_2025_2"
                        class="course__link"
                        target="_blank"
                        rel="noopener noreferrer">
-                        Ver Curso no GitHub
+                        Explorar o repositório
                     </a>
                 </div>
             </div>
@@ -373,33 +342,13 @@
             <div class="container">
                 <h2 class="section__title">Contacto</h2>
                 <div class="contact-container fade-in">
-                    <form id="contact-form" class="contact-form" action="https://formspree.io/f/xyzkrrep" method="POST">
-                        <div class="form-group">
-                            <label for="name">Nome / Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Seu nome...">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensagem / Message</label>
-                            <textarea id="message" name="message" required placeholder="Como posso ajudar?"></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn" id="submit-btn">Enviar Mensagem</button>
-                        <div id="form-status" class="form-status" aria-live="polite"></div>
-                    </form>
+
                     <div class="contact">
                         <p class="contact__intro">
-                            Estou disponível para <strong>colaborações técnicas</strong>, <strong>mentoria especializada</strong>,
-                            <strong>parcerias educativas</strong> ou <strong>projetos desafiantes</strong> que exijam
-                            arquitetura sólida, engenharia de qualidade e orientação para resultados mensuráveis.
+                            Para contacto profissional, colaboração ou discussão de projetos, utiliza os perfis públicos abaixo.
                         </p>
                         <div class="contact__links">
-                            <a href="mailto:smpsandro1239@gmail.com" class="contact__link">
-                                <span class="contact__icon" aria-hidden="true">📧</span>
-                                Email Profissional
-                            </a>
+
                             <a href="https://linkedin.com/in/sandro-pereira-a5ab0236"
                                class="contact__link"
                                target="_blank"
@@ -428,14 +377,8 @@
                     © <span id="current-year">2026</span> Sandro Pereira
                 </p>
                 <div class="footer__badges">
-                    <span class="badge" title="Lighthouse Performance Score">
-                        <span class="badge__icon" aria-hidden="true">⚡</span>
-                        Performance
-                    </span>
-                    <span class="badge" title="WCAG 2.1 AA Compliant">
-                        <span class="badge__icon" aria-hidden="true">♿</span>
-                        Accessible
-                    </span>
+                    <span class="badge">HTML · CSS · JavaScript</span>
+                    <span class="badge">Publicado no GitHub Pages</span>
                 </div>
             </div>
         </div>
