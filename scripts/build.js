@@ -31,7 +31,7 @@ async function build() {
 
   for (const stylesheet of ['main.css', 'case-studies.css']) {
     run(npmExec, [
-      'csso-cli',
+      'csso',
       join(source, 'css', stylesheet),
       '-o',
       join(output, 'css', stylesheet)
