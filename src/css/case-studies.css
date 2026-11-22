@@ -178,6 +178,8 @@
 
 .architecture {
   display: flex;
+  list-style: none;
+  padding-left: 0;
   align-items: stretch;
   gap: 0.5rem;
   margin: 1rem 0;
@@ -210,6 +212,7 @@
 }
 
 .architecture-arrow {
+  flex: 0 0 auto;
   align-self: center;
   color: #1d4ed8;
   font-size: 1.2rem;
