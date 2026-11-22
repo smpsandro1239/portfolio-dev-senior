@@ -627,7 +627,7 @@ a:focus {
   text-align: center;
 }
 
-.skills-grid {
+.course__skills .skills-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
