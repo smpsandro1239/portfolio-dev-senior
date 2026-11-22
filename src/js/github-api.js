@@ -68,7 +68,7 @@ export class GitHubApiClient {
         const params = new URLSearchParams({
             sort: 'updated',
             direction: 'desc',
-            per_page: '20',
+            per_page: '100',
             type: 'owner'
         });
 
@@ -85,12 +85,13 @@ export class GitHubApiClient {
     processRepositories(repositories) {
         // Define the pinned repositories in order of priority
         const pinnedRepos = [
+            'AiCryptoMultiAgente',
             'IOT',
-            'empregabilidade-amar-terra-verde',
-            'IOTCNT',
             'TimeAdministrator',
-            'portfolio-dev-senior',
-            'curso-js-2026-pt'
+            'MultiFreq_',
+            'Sistema-de-Faturacao-AT',
+            'Curso_JavaScript_2025_2',
+            'portfolio-dev-senior'
         ];
 
         // First, try to get all repositories (including private ones if accessible)
@@ -114,36 +115,14 @@ export class GitHubApiClient {
                 visibility: repo.private ? 'Private' : 'Public'
             }));
 
-        // If we don't have all 6 repositories, create placeholder entries for missing ones
-        if (filteredRepos.length < 6) {
-            const foundRepoNames = filteredRepos.map(repo => repo.name);
-            const missingRepos = pinnedRepos.filter(name => !foundRepoNames.includes(name));
 
-            missingRepos.forEach(repoName => {
-                filteredRepos.push({
-                    id: `placeholder-${repoName}`,
-                    name: repoName,
-                    description: this.getDefaultDescription(repoName),
-                    html_url: `https://github.com/smpsandro1239/${repoName}`,
-                    language: this.getDefaultLanguage(repoName),
-                    topics: [],
-                    stargazers_count: 0,
-                    forks_count: 0,
-                    updated_at: new Date().toISOString(),
-                    created_at: new Date().toISOString(),
-                    size: 0,
-                    visibility: 'Public',
-                    isPlaceholder: true
-                });
-            });
-        }
 
         // Sort by the pinned order
         return filteredRepos.sort((a, b) => {
             const aIndex = pinnedRepos.indexOf(a.name);
             const bIndex = pinnedRepos.indexOf(b.name);
             return aIndex - bIndex;
-        }).slice(0, 6); // Ensure we only return 6 projects
+        }).slice(0, 7); // Apenas repositórios reais encontrados na API
     }
 
     /**
@@ -151,13 +130,14 @@ export class GitHubApiClient {
      */
     getDefaultDescription(repoName) {
         const descriptions = {
-            'IOT': 'Solução empresarial para controlo de barreiras físicas e monitorização de acesso veicular. Integra hardware ESP32 com backend Laravel, oferecendo controlo operacional preciso, segurança baseada em endereços MAC e atualizações em tempo real via LoRa',
-            'empregabilidade-amar-terra-verde': 'Sistema web para gestão de empregabilidade e sustentabilidade ambiental',
-            'IOTCNT': 'Contador inteligente IoT com interface web e monitorização remota',
-            'TimeAdministrator': 'Aplicação TypeScript para gestão e administração de tempo',
-            'portfolio-dev-senior': 'Portfolio profissional desenvolvido com HTML5, CSS3 e JavaScript vanilla',
-            'curso-js-2026-pt': 'Curso completo de JavaScript moderno em português europeu'
-        };
+            'AiCryptoMultiAgente': 'Framework modular de trading multiagente, com análise de mercado, gestão de risco e execução algorítmica.',
+            'IOT': 'Sistema de controlo de acessos e barreiras com integração de hardware ESP32, backend e comunicação LoRa.',
+            'TimeAdministrator': 'Aplicação de gestão e administração de tempo, construída com tecnologias web modernas.',
+            'MultiFreq_': 'Ferramenta para gerir instâncias Freqtrade, estratégias, backtesting e operações em Docker.',
+            'Sistema-de-Faturacao-AT': 'Aplicação web de faturação e gestão comercial. Consulte o repositório para verificar o estado e âmbito das funcionalidades.',
+            'Curso_JavaScript_2025_2': 'Projeto de aprendizagem e experimentação com JavaScript e integração de IA.',
+            'portfolio-dev-senior': 'Portefólio profissional desenvolvido com HTML, CSS e JavaScript.'
+        };;
 
         return descriptions[repoName] || 'Projeto de desenvolvimento de software';
     }
