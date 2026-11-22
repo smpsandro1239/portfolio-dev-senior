@@ -3,6 +3,7 @@
 Portefólio pessoal para apresentar projetos, tecnologias e percurso de aprendizagem em desenvolvimento de software.
 
 🌐 **Site:** https://smpsandro1239.github.io/portfolio-dev-senior/  
+🧭 **Estudos de caso:** https://smpsandro1239.github.io/portfolio-dev-senior/projetos.html  
 💻 **GitHub:** https://github.com/smpsandro1239  
 💼 **LinkedIn:** https://linkedin.com/in/sandro-pereira-a5ab0236
 
@@ -31,6 +32,10 @@ Os cartões do site consultam os repositórios públicos através da API do GitH
 ## Formação
 
 TeSP em **Desenvolvimento Web e Multimédia** — percurso de ensino superior técnico-profissional com 90 ECTS.
+
+## Estudos de caso técnicos
+
+A página [Projetos e Estudos de Caso](https://smpsandro1239.github.io/portfolio-dev-senior/projetos.html) aprofunda cinco repositórios, apresenta fluxos arquiteturais conceptuais e distingue funcionalidades documentadas de capacidades ainda não validadas. Não apresenta como certificadas funcionalidades fiscais nem como comprovados resultados de hardware, trading ou integrações externas.
 
 ## Tecnologias do portefólio
 
