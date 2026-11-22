@@ -118,6 +118,10 @@ class PortfolioApp {
             // Set up header scroll effect
             this.setupHeaderScrollEffect();
 
+            // Initialise independent UI features even if GitHub API is unavailable.
+            this.setupContactForm();
+            this.setupCustomCursor();
+
             console.log('Portfolio app initialized successfully');
         } catch (error) {
             console.error('Error initializing portfolio app:', error);
@@ -200,10 +204,6 @@ class PortfolioApp {
             // Render projects (limit initial view)
             this.renderProjects(repositories.slice(0, this.config.maxProjects), projectsContainer);
             this.setupProjectFilters();
-        this.setupContactForm();
-        this.setupCVDownload();
-        this.setupCustomCursor();
-        this.animateSkills();
 
         } catch (error) {
             console.error('Error loading projects:', error);
@@ -311,25 +311,32 @@ class PortfolioApp {
     getFallbackProjects() {
         const fallbackProjects = [
             {
-                name: 'curso-js-2026-pt',
-                description: 'Curso completo de JavaScript moderno em português',
-                language: 'JavaScript',
-                topics: ['javascript', 'tutorial', 'português', 'educação'],
-                html_url: 'https://github.com/smpsandro1239/curso-js-2026-pt'
-            },
-            {
-                name: 'portfolio-dev-senior',
-                description: 'Portfolio técnico desenvolvido em HTML, CSS e JavaScript vanilla',
-                language: 'JavaScript',
-                topics: ['portfolio', 'vanilla-js', 'css3', 'html5'],
-                html_url: 'https://github.com/smpsandro1239/portfolio-dev-senior'
-            },
-            {
-                name: 'freqtrade-strategies',
-                description: 'Estratégias avançadas de trading algorítmico',
+                name: 'AiCryptoMultiAgente',
+                description: 'Framework modular para análise de mercado e trading algorítmico multiagente.',
                 language: 'Python',
-                topics: ['trading', 'algoritmos', 'fintech'],
-                html_url: 'https://github.com/smpsandro1239/freqtrade'
+                topics: ['python', 'trading', 'multi-agent'],
+                html_url: 'https://github.com/smpsandro1239/AiCryptoMultiAgente'
+            },
+            {
+                name: 'IOT',
+                description: 'Sistema de controlo de acessos e barreiras com integração de hardware.',
+                language: 'PHP',
+                topics: ['iot', 'esp32', 'laravel'],
+                html_url: 'https://github.com/smpsandro1239/IOT'
+            },
+            {
+                name: 'TimeAdministrator',
+                description: 'Aplicação web para gestão e administração de tempo.',
+                language: 'TypeScript',
+                topics: ['typescript', 'web'],
+                html_url: 'https://github.com/smpsandro1239/TimeAdministrator'
+            },
+            {
+                name: 'MultiFreq_',
+                description: 'Ferramentas para gerir instâncias Freqtrade e fluxos de trading.',
+                language: 'Python',
+                topics: ['python', 'docker', 'freqtrade'],
+                html_url: 'https://github.com/smpsandro1239/MultiFreq_'
             }
         ];
 
