@@ -9,6 +9,7 @@ const sitemap = readFileSync(join(process.cwd(), 'src', 'sitemap.xml'), 'utf8');
 const serviceWorker = readFileSync(join(process.cwd(), 'src', 'sw.js'), 'utf8');
 const mainScript = readFileSync(join(process.cwd(), 'src', 'js', 'main.js'), 'utf8');
 const mainStyles = readFileSync(join(process.cwd(), 'src', 'css', 'main.css'), 'utf8');
+const navigationScript = readFileSync(join(process.cwd(), 'src', 'js', 'navigation.js'), 'utf8');
 
 describe('Technical project case studies', () => {
   test('provides semantic page structure and a single primary heading', () => {
@@ -85,6 +86,13 @@ describe('Technical project case studies', () => {
     expect(serviceWorker).toContain("'projetos.html'");
     expect(serviceWorker).toContain("'css/case-studies.css'");
     expect(serviceWorker).toContain(".then(async response =>");
+  });
+
+  test('respects reduced-motion preferences in JavaScript navigation', () => {
+    expect(navigationScript).toContain("matchMedia('(prefers-reduced-motion: reduce)')");
+    expect(navigationScript).toContain('getScrollBehavior()');
+    expect(navigationScript).toContain('getScrollDuration()');
+    expect((navigationScript.match(/behavior: this.getScrollBehavior\(\)/g) || []).length).toBe(3);
   });
 
   test('does not retain handlers for removed placeholder UI', () => {
