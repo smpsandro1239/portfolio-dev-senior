@@ -31,7 +31,7 @@
 
 .case-brand span,
 .case-hero h1 span {
-  color: var(--color-primary);
+  color: #1d4ed8;
 }
 
 .case-header nav {
@@ -49,7 +49,7 @@
 
 .case-header nav a:hover,
 .case-footer a:hover {
-  color: var(--color-primary);
+  color: #1d4ed8;
 }
 
 .case-hero {
@@ -61,7 +61,7 @@
 .case-eyebrow {
   font: 700 0.75rem/1.4 var(--font-family-mono);
   letter-spacing: 0.12em;
-  color: var(--color-primary);
+  color: #1d4ed8;
 }
 
 .case-hero h1 {
@@ -144,7 +144,7 @@
 .case-number {
   font: 700 0.75rem/1.4 var(--font-family-mono);
   letter-spacing: 0.1em;
-  color: var(--color-primary);
+  color: #1d4ed8;
 }
 
 .case-status {
@@ -211,7 +211,7 @@
 
 .architecture-arrow {
   align-self: center;
-  color: var(--color-primary);
+  color: #1d4ed8;
   font-size: 1.2rem;
   font-weight: 800;
 }
@@ -249,7 +249,7 @@
 .case-link {
   display: inline-flex;
   margin-top: 1.4rem;
-  color: var(--color-primary);
+  color: #1d4ed8;
   font-weight: 700;
   text-decoration: none;
 }
