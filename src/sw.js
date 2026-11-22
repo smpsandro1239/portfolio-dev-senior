@@ -1,11 +1,13 @@
 /* Autor: Sandro Pereira (smpsandro1239) */
 /* Service Worker: cache local assets and provide an offline fallback. */
 
-const CACHE_NAME = 'sandro-portfolio-v3';
+const CACHE_NAME = 'sandro-portfolio-v4';
 const ASSETS_TO_CACHE = [
   '',
   'index.html',
+  'projetos.html',
   'css/main.css',
+  'css/case-studies.css',
   'js/main.js',
   'js/theme-manager.js',
   'js/navigation.js',
@@ -47,7 +49,7 @@ self.addEventListener('fetch', event => {
 
   event.respondWith(
     fetch(request)
-      .then(response => {
+      .then(async response => {
         if (response.ok && response.type === 'basic') {
           const responseToCache = response.clone();
           await caches.open(CACHE_NAME)
