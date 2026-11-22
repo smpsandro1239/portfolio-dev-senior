@@ -77,12 +77,19 @@ jobs:
       run: |
         echo "Checking performance budget..."
         
-        css_size=$(stat -c%s docs/css/main.css)
+        css_size=0
+        for file in docs/css/*.css; do
+          if [ -f "$file" ]; then
+            size=$(stat -c%s "$file")
+            css_size=$((css_size + size))
+          fi
+        done
+
         if [ $css_size -gt 51200 ]; then
-          echo "❌ CSS file too large: ${css_size} bytes (limit: 50KB)"
+          echo "❌ Total CSS too large: ${css_size} bytes (limit: 50KB)"
           exit 1
         else
-          echo "✅ CSS size OK: ${css_size} bytes"
+          echo "✅ Total CSS size OK: ${css_size} bytes"
         fi
         
         js_total=0
