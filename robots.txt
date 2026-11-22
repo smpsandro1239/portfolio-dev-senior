@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://smpsandro1239.github.io/portfolio-dev-senior/sitemap.xml
