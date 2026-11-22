@@ -1,7 +1,7 @@
 /* Autor: Sandro Pereira (smpsandro1239) */
 /* Service Worker: cache local assets and provide an offline fallback. */
 
-const CACHE_NAME = 'sandro-portfolio-v4';
+const CACHE_NAME = 'sandro-portfolio-v5';
 const ASSETS_TO_CACHE = [
   '',
   'index.html',
@@ -15,7 +15,9 @@ const ASSETS_TO_CACHE = [
   'js/github-api.js',
   'js/i18n.js',
   'js/github-stats.js',
-  'manifest.json'
+  'manifest.json',
+  'robots.txt',
+  'sitemap.xml'
 ];
 
 self.addEventListener('install', event => {
