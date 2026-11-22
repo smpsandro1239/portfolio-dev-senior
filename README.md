@@ -22,6 +22,7 @@ Os cartões do site consultam os repositórios públicos através da API do GitH
 
 | Projeto | Descrição |
 |---|---|
+| SMART SHELF AI (em desenvolvimento) | Projeto de IA e visão computacional; código ainda não público neste portefólio. |
 | [AiCryptoMultiAgente](https://github.com/smpsandro1239/AiCryptoMultiAgente) | Framework modular para análise de mercado e trading algorítmico multiagente. |
 | [IOT](https://github.com/smpsandro1239/IOT) | Solução de controlo de acessos e barreiras com integração de hardware. |
 | [TimeAdministrator](https://github.com/smpsandro1239/TimeAdministrator) | Aplicação web para gestão e administração de tempo. |
