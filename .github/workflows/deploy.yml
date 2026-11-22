@@ -123,7 +123,7 @@ jobs:
       run: |
         echo "Verificando conteúdo da pasta docs..."
         ls -la docs/
-        for required_file in docs/index.html docs/projetos.html docs/manifest.json docs/sw.js docs/css/main.css docs/css/case-studies.css docs/js/main.js; do
+        for required_file in docs/index.html docs/projetos.html docs/manifest.json docs/sw.js docs/robots.txt docs/sitemap.xml docs/css/main.css docs/css/case-studies.css docs/js/main.js; do
           if [ ! -f "$required_file" ]; then
             echo "❌ Ficheiro obrigatório em falta: $required_file"
             exit 1
