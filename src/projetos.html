@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="utf-8">
@@ -84,13 +84,13 @@
         <p class="case-summary">Projeto em desenvolvimento no domínio da inteligência artificial aplicada à análise de prateleiras, com trabalho nas áreas de visão computacional, integração de modelos e engenharia de software.</p>
         <div class="case-tags"><span>Computer Vision</span><span>ONNX</span><span>Python</span><span>Backend</span><span>Frontend</span><span>Ed25519</span></div>
         <h3>Fluxo técnico conceptual</h3>
-        <div class="architecture architecture--three" role="list" aria-label="Fluxo conceptual do SMART SHELF AI">
-          <div class="architecture-node" role="listitem"><strong>Entrada visual</strong><small>Imagem e dados da prateleira</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>Visão computacional</strong><small>Processamento e inferência</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>Aplicação</strong><small>Backend, frontend e resultados</small></div>
-        </div>
+        <ul class="architecture architecture--three" aria-label="Fluxo conceptual do SMART SHELF AI">
+          <li class="architecture-node"><strong>Entrada visual</strong><small>Imagem e dados da prateleira</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>Visão computacional</strong><small>Processamento e inferência</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>Aplicação</strong><small>Backend, frontend e resultados</small></li>
+        </ul>
         <div class="case-columns">
           <div><h3>Frentes de trabalho</h3><ul><li>Integração de modelos de inferência no formato ONNX.</li><li>Desenvolvimento e articulação de componentes de backend e frontend.</li><li>Organização do pipeline de visão computacional.</li><li>Validação técnica dos artefactos e dos resultados produzidos.</li></ul></div>
           <div><h3>Prioridade de segurança</h3><ul><li>Manifesto de modelos com assinatura Ed25519.</li><li>Chave pública de confiança para verificar a origem e integridade.</li><li>Validação fail-closed: rejeitar modelos quando a verificação não é conclusiva.</li><li>Separação entre modelos confiáveis e artefactos não validados.</li></ul></div>
@@ -107,17 +107,17 @@
         <p class="case-summary">Framework modular e orientado a eventos para decompor a análise de mercado e a execução de estratégias em agentes com responsabilidades distintas.</p>
         <div class="case-tags"><span>Python</span><span>AsyncIO</span><span>CCXT</span><span>YAML</span><span>Backtesting</span></div>
         <h3>Arquitetura funcional</h3>
-        <div class="architecture" role="list" aria-label="Fluxo conceptual dos agentes">
-          <div class="architecture-node" role="listitem"><strong>Regime</strong><small>Contexto de mercado</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>Scanner</strong><small>Pesquisa de oportunidades</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>Risk</strong><small>Avaliação de risco</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>Supervisor</strong><small>Coordenação e decisão</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>Execution</strong><small>Execução de ordens</small></div>
-        </div>
+        <ul class="architecture" aria-label="Fluxo conceptual dos agentes">
+          <li class="architecture-node"><strong>Regime</strong><small>Contexto de mercado</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>Scanner</strong><small>Pesquisa de oportunidades</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>Risk</strong><small>Avaliação de risco</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>Supervisor</strong><small>Coordenação e decisão</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>Execution</strong><small>Execução de ordens</small></li>
+        </ul>
         <div class="case-columns">
           <div><h3>Componentes documentados</h3><ul><li>Event bus assíncrono para comunicação entre agentes.</li><li>Backtester com modelação de slippage e comissões.</li><li>Integração CCXT para fluxos de mercado e trading.</li><li>Políticas configuráveis em YAML e memória semântica para decisões.</li><li>Módulos de indicadores, scanners, métricas e relatórios.</li></ul></div>
           <div><h3>Questões de engenharia</h3><ul><li>Separação entre sinal, gestão de risco e execução.</li><li>Rastreabilidade das decisões e dos eventos.</li><li>Testes em cenários históricos e simulação antes de qualquer operação real.</li><li>Gestão de falhas de rede, limites de API e idempotência de ordens.</li></ul></div>
@@ -142,13 +142,13 @@
           <figcaption>Imagem disponibilizada na documentação pública do repositório IOT.</figcaption>
         </figure>
         <h3>Arquitetura por camadas</h3>
-        <div class="architecture architecture--three" role="list" aria-label="Camadas da solução IoT">
-          <div class="architecture-node" role="listitem"><strong>Interface Web</strong><small>Dashboard, gestão e métricas</small></div>
-          <span class="architecture-arrow" aria-hidden="true">↔</span>
-          <div class="architecture-node" role="listitem"><strong>Backend Laravel</strong><small>API, regras e persistência MySQL</small></div>
-          <span class="architecture-arrow" aria-hidden="true">↔</span>
-          <div class="architecture-node" role="listitem"><strong>ESP32 / LoRa</strong><small>Firmware e comunicação com hardware</small></div>
-        </div>
+        <ul class="architecture architecture--three" aria-label="Camadas da solução IoT">
+          <li class="architecture-node"><strong>Interface Web</strong><small>Dashboard, gestão e métricas</small></li>
+          <li class="architecture-arrow" aria-hidden="true">↔</li>
+          <li class="architecture-node"><strong>Backend Laravel</strong><small>API, regras e persistência MySQL</small></li>
+          <li class="architecture-arrow" aria-hidden="true">↔</li>
+          <li class="architecture-node"><strong>ESP32 / LoRa</strong><small>Firmware e comunicação com hardware</small></li>
+        </ul>
         <div class="case-columns">
           <div><h3>Funcionalidades descritas</h3><ul><li>Gestão centralizada de dispositivos autorizados por endereço MAC.</li><li>Monitorização de estados, acessos e registos operacionais.</li><li>Lógica de deteção direcional para apoiar a automação de barreiras.</li><li>Dashboard com métricas e gráficos de atividade.</li><li>Modo de simulação para desenvolver e testar lógica sem hardware ligado.</li></ul></div>
           <div><h3>Desafios técnicos</h3><ul><li>Comunicação entre firmware e backend.</li><li>Tratamento de perda de conectividade e estados desatualizados.</li><li>Autorização dos dispositivos e proteção das operações físicas.</li><li>Separação entre simulação, ambiente de desenvolvimento e hardware real.</li></ul></div>
@@ -166,13 +166,13 @@
         <p class="case-summary">Aplicação de gestão de clientes e subscrições, com áreas administrativas e de cliente, API backend e infraestrutura containerizada.</p>
         <div class="case-tags"><span>Angular</span><span>TypeScript</span><span>NestJS</span><span>MongoDB</span><span>JWT</span><span>Docker</span></div>
         <h3>Arquitetura da aplicação</h3>
-        <div class="architecture architecture--three" role="list" aria-label="Arquitetura do TimeAdministrator">
-          <div class="architecture-node" role="listitem"><strong>Frontend Angular</strong><small>Interface administrativa e cliente</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>API NestJS</strong><small>Autenticação, serviços e regras</small></div>
-          <span class="architecture-arrow" aria-hidden="true">→</span>
-          <div class="architecture-node" role="listitem"><strong>MongoDB</strong><small>Persistência de dados</small></div>
-        </div>
+        <ul class="architecture architecture--three" aria-label="Arquitetura do TimeAdministrator">
+          <li class="architecture-node"><strong>Frontend Angular</strong><small>Interface administrativa e cliente</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>API NestJS</strong><small>Autenticação, serviços e regras</small></li>
+          <li class="architecture-arrow" aria-hidden="true">→</li>
+          <li class="architecture-node"><strong>MongoDB</strong><small>Persistência de dados</small></li>
+        </ul>
         <div class="case-columns">
           <div><h3>Âmbito funcional documentado</h3><ul><li>Gestão de clientes, subscrições, estados e renovações.</li><li>Área de cliente e histórico de pagamentos.</li><li>Dashboard, relatórios e tarefas agendadas.</li><li>Integrações descritas para pagamentos e notificações multicanal.</li><li>Execução local e containerização com Docker.</li></ul></div>
           <div><h3>Segurança e operação</h3><ul><li>Autenticação baseada em JWT e controlo de acesso.</li><li>Segredos e credenciais devem ser fornecidos por variáveis de ambiente.</li><li>Provisionamento inicial sem passwords fixas no código.</li><li>Integrações externas exigem credenciais, testes e validação de ambiente.</li></ul></div>
