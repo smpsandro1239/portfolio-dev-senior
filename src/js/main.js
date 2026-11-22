@@ -198,7 +198,6 @@ class PortfolioApp {
 
             // Fetch repositories
             const repositories = await this.githubClient.getRepositories(100);
-            this.repositories = repositories; // Save for filtering
 
             // Render projects (limit initial view)
             this.renderProjects(repositories.slice(0, this.config.maxProjects), projectsContainer);
