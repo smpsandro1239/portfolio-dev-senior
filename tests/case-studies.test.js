@@ -21,7 +21,7 @@ describe('Technical project case studies', () => {
 
   test('documents the five selected public repositories', () => {
     const expectedIds = [
-      'ai-crypto',
+      'smart-shelf-ai',\n      'ai-crypto',
       'iot',
       'time-administrator',
       'multifreq',
@@ -33,7 +33,14 @@ describe('Technical project case studies', () => {
     }
   });
 
-  test('links each case study to the matching public repository', () => {
+  test('labels SMART SHELF AI as in development and does not imply public source code', () => {
+    expect(page).toContain('id="smart-shelf-ai"');
+    expect(page).toContain('Em desenvolvimento · sem código público');
+    expect(page).toContain('não são apresentadas como funcionalidades concluídas');
+    expect(page).not.toContain('https://github.com/smpsandro1239/SMART-SHELF-AI');
+  });
+
+  test('links each public repository case study to the matching repository', () => {
     const expectedRepositories = [
       'AiCryptoMultiAgente',
       'IOT',
