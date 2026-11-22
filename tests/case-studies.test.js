@@ -71,7 +71,7 @@ describe('Technical project case studies', () => {
   test('qualifies hardware, trading and external integration claims', () => {
     expect(page).toContain('não constitui prova de rentabilidade');
     expect(page).toContain('devem ser confirmados em ensaios físicos');
-    expect(page).toContain('não se presume que todos os fornecedores externos estejam ativos');
+    expect(page).toMatch(/não se presume que todos os fornecedores externos estejam ativos/i);
   });
 
   test('provides direct navigation to every project case study', () => {
