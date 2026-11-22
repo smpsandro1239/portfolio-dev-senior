@@ -67,6 +67,7 @@ describe('Technical project case studies', () => {
   test('publishes the case studies, SEO files and stylesheets in the production build', () => {
     expect(buildScript).toContain("join(source, 'projetos.html')");
     expect(buildScript).toContain("'case-studies.css'");
+    expect(buildScript).toContain("'csso'");
     expect(buildScript).toContain("'robots.txt'");
     expect(buildScript).toContain("'sitemap.xml'");
     expect(sitemap).toContain('/projetos.html');
