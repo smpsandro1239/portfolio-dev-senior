@@ -11,6 +11,7 @@ const ASSETS_TO_CACHE = [
   'js/navigation.js',
   'js/animation-controller.js',
   'js/github-api.js',
+  'js/i18n.js',
   'js/github-stats.js',
   'manifest.json'
 ];
